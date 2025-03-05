@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import Client
 from .forms import AddClientForm
+from team.models import Team
 
 @login_required
 def clients_list(request):
@@ -29,10 +30,12 @@ def clients_add(request):
    if request.method =='POST':  
      form = AddClientForm(request.POST)
      if form.is_valid():
+            team = Team.objects.filter(created_by=request.user)[0]
             client = form.save(commit=False)
             
             
             client.created_by = request.user
+            client.team = team
             client.save()
             messages.success(request, f"the client was created!")
      return redirect('clients_list')
