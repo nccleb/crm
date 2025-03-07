@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AddLeadForm
 from .models import Lead
 from client.models import Client
-from team.models import Team
+from team.models import Plan, Team
 
 @login_required
 def leads_list(request):
@@ -60,6 +60,8 @@ def leads_edit(request,pk):
 
 @login_required
 def add_lead(request):
+   team = Team.objects.filter(created_by=request.user)[0]
+   
    if request.method =='POST':  
      form = AddLeadForm(request.POST)
      if form.is_valid():
@@ -75,8 +77,10 @@ def add_lead(request):
    else:
      form = AddLeadForm() 
      
-   return render(request, 'lead/lead_form.html',{
-    'form':form
+   return render(request, 'lead/add_lead.html',{
+    'form':form,
+    'team':team
+    
  })
 
 

@@ -7,9 +7,20 @@
     <h1 class="mb-6 text-xl">My account</h1>
 
     
+    <p class="mb-2">
+        <strong>Username: </strong>{{ request.user.username }}
+    </p>
+    <p class="mb-2">
+        
+            <strong>Team: </strong><a href="#">{{team.name}}</a>
+            {% if team.created_by == request.user %}
+            <a href="{% url 'team:edit' team.id %} ">(Edit)</a>
+            {% endif %}
+        </p>
 
-    <hr class="mb-4">
-
-    <a href="{% url 'logout' %}" class="inline-block py-4 px-6 bg-red-600 rounded-xl text-white">Log out</a>
-</div>
-{% endblock %}
+        <hr class="mb-4">
+    
+        <a href="{% url 'logout' %}" class="inline-block py-4 px-6 bg-red-600 rounded-xl text-white">Log out</a>
+    </div>
+{% endblock %}    
+    

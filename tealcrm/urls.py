@@ -27,5 +27,6 @@ urlpatterns = [
     path('convert_to_client/<int:pk>/', convert_to_client, name='leads_convert'),
     path('', include('core.urls')),
     path('dashboard/clients/', include('client.urls')),
+    path('dashboard/teams/', include('team.urls')),
     path('admin/', admin.site.urls),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
