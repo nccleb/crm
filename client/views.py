@@ -38,7 +38,7 @@ def clients_add(request):
             client.team = team
             client.save()
             messages.success(request, f"the client was created!")
-     return redirect('clients_list')
+     return redirect('clients:list')
    else:
      form = AddClientForm() 
      
@@ -59,7 +59,7 @@ def clients_edit(request, pk):
 
             messages.success(request, 'The changes was saved.')
 
-            return redirect('clients_list')
+            return redirect('clients:list')
     else:
         form = AddClientForm(instance=client)
     
@@ -75,6 +75,6 @@ def clients_delete(request,pk):
     client = get_object_or_404(Client, created_by=request.user, pk=pk)
     client.delete()
     messages.success(request, f"the client was deleted!")
-    return redirect('clients_list')
+    return redirect('clients:list')
 
 
