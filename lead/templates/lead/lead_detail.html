@@ -47,7 +47,7 @@
             {% endfor %}
         </div>
 
-        <form method="post" action="#">
+        <form method="post" action="{% url 'leads:add_comment' lead.id %}">
             {% csrf_token %}
 
             {{ form.as_p }}
@@ -69,7 +69,7 @@
             {% endfor %}
         </div>
 
-        <form method="post" action="#" enctype="multipart/form-data">
+        <form method="post" action="{% url 'leads:add_file' lead.id %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             {{ fileform.as_p }}
@@ -79,6 +79,6 @@
 
         <hr class="my-4">
 
-        <a href="#">Back to leads</a>
+        <a href="{% url 'leads_list' %}">Back to leads</a>
     </div>
 {% endblock %}

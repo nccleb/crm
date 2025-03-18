@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Lead
+from .models import Lead, Comment, LeadFile
 
 admin.site.register(Lead)
-#admin.site.register(Comment)
-#admin.site.register(LeadFile)
+admin.site.register(Comment)
+admin.site.register(LeadFile)

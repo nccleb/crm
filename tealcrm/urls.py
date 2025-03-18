@@ -10,6 +10,8 @@ from userprofile.views import signup, myaccount
 from userprofile.forms import LoginForm
 from django.contrib.auth.views import LogoutView
 
+
+
 urlpatterns = [
     path('about/',about,name='about'),
     path('myaccount/',myaccount,name='myaccount'),
