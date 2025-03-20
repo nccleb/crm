@@ -20,10 +20,10 @@ def clients_export(request):
     )
 
     writer = csv.writer(response)
-    writer.writerow(['Client', 'Description', 'Created at', 'Created by'])
+    writer.writerow(['Client','phone_number', 'Description', 'Created at', 'Created by'])
 
     for client in clients:
-        writer.writerow([client.name, client.description, client.created_at, client.created_by])
+        writer.writerow([client.name,client.phone_number, client.description, client.created_at, client.created_by])
     
     return response
 
