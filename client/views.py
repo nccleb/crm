@@ -10,8 +10,8 @@ from team.models import Team
 
 @login_required
 def clients_export(request):
-    #team = request.user.userprofile.active_team
-    team = Team.objects.filter(created_by=request.user)[0]
+    team = request.user.userprofile.active_team
+    #team = Team.objects.filter(created_by=request.user)[0]
     clients = team.clients.all()
 
     response = HttpResponse(
@@ -46,10 +46,10 @@ def clients_list(request):
 def clients_add_file(request, pk):
     if request.method == 'POST':
         form = AddFileForm(request.POST, request.FILES)
-        team = Team.objects.filter(created_by=request.user)[0]
+        #team = Team.objects.filter(created_by=request.user)[0]
         if form.is_valid():
             file = form.save(commit=False)
-            file.team = team
+            file.team = request.user.userprofile.active_team
             file.client_id = pk
             file.created_by = request.user
             file.save()
@@ -61,13 +61,13 @@ def clients_add_file(request, pk):
 def clients_detail(request,pk):
     
     client = get_object_or_404(Client, created_by=request.user, pk=pk)
-    team = Team.objects.filter(created_by=request.user)[0]
+    #team = Team.objects.filter(created_by=request.user)[0]
     if request.method == 'POST':
         form = AddCommentForm(request.POST)
 
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.team = team
+            comment.team = request.user.userprofile.active_team
             comment.created_by = request.user
             comment.client = client
             comment.save()
@@ -87,12 +87,12 @@ def clients_add(request):
    if request.method =='POST':  
      form = AddClientForm(request.POST)
      if form.is_valid():
-            team = Team.objects.filter(created_by=request.user)[0]
+            #team = Team.objects.filter(created_by=request.user)[0]
             client = form.save(commit=False)
             
             
             client.created_by = request.user
-            client.team = team
+            client.team = request.user.userprofile.active_team
             client.save()
             messages.success(request, f"the client was created!")
      return redirect('clients:list')
