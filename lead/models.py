@@ -31,6 +31,7 @@ class Lead(models.Model):
     phone_number = models.CharField(null=True, max_length=254, blank=True)
     email = models.EmailField()
     description = models.TextField(blank=True, null=True)
+    #address = models.TextField(blank=True, null=True)
     priority = models.CharField(max_length=10, choices=CHOICES_PRIORITY, default=MEDIUM)
     status = models.CharField(max_length=10, choices=CHOICES_STATUS, default=NEW)
     converted_to_client = models.BooleanField(default=False)

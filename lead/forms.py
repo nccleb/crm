@@ -5,7 +5,7 @@ from .models import Lead, Comment, LeadFile
 class AddLeadForm(forms.ModelForm):
     class Meta:
         model = Lead
-        fields = ('name', 'phone_number','email', 'description', 'priority', 'status',)
+        fields = ('name','phone_number','email', 'description', 'priority', 'status',)
 
 
 class AddCommentForm(forms.ModelForm):
