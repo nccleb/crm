@@ -98,7 +98,7 @@ def leads_delete(request,pk):
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     model = Lead
-    fields = ('name','phone_number', 'email', 'description', 'priority', 'status',)
+    fields = ('name','address','phone_number', 'email', 'description', 'priority', 'status',)
     success_url = reverse_lazy('leads_list')
 
     
@@ -142,43 +142,44 @@ def leads_edit(request,pk):
     'form':form
  })
 """
-
+""""
 
 class LeadCreateView(LoginRequiredMixin, CreateView):
     model = Lead
-    fields = ('name','phone_number', 'email', 'description', 'priority', 'status',)
+    fields = ('name','address','phone_number', 'email', 'description', 'priority', 'status',)
     success_url = reverse_lazy('leads_list')
 
     
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        #team = self.request.user.userprofile.get_active_team()
-        team = Team.objects.filter(created_by=self.request.user)[0]
+        team = self.request.user.userprofile.get_active_team()
+        
         context['team'] = team
         context['title'] = 'Add lead'
 
         return context
 
     def form_valid(self, form):
-        team = Team.objects.filter(created_by=self.request.user)[0]
+        team = self.request.user.userprofile.get_active_team()
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
-       # self.object.team = self.request.user.userprofile.get_active_team()
+        self.object.team = self.request.user.userprofile.get_active_team()
         self.object.team = team
         self.object.save()
         
         return redirect(self.get_success_url())
 
-""""
+"""""
+
 @login_required
 def add_lead(request):
-   team = Team.objects.filter(created_by=request.user)[0]
+   team = request.user.userprofile.get_active_team()
    
    if request.method =='POST':  
      form = AddLeadForm(request.POST)
      if form.is_valid():
-            team = Team.objects.filter(created_by=request.user)[0]
+            team = request.user.userprofile.get_active_team()
             lead = form.save(commit=False)
             
             
@@ -186,16 +187,18 @@ def add_lead(request):
             lead.team = team
             lead.save()
             messages.success(request, f"the lead was created!")
-     return redirect('/leads:list/')
+     else:
+          messages.success(request, f"the lead was not  created!")
+     return redirect('/leads_list/')
    else:
      form = AddLeadForm() 
-     
+    
    return render(request, 'lead/add_lead.html',{
     'form':form,
     'team':team
     
  })
-"""
+
 
 
 class AddFileView(LoginRequiredMixin, View):
@@ -206,7 +209,8 @@ class AddFileView(LoginRequiredMixin, View):
 
         if form.is_valid():
             file = form.save(commit=False)
-            team = Team.objects.filter(created_by=request.user)[0]
+            
+            team = self.request.user.userprofile.active_team
             file.team = team
             file.lead_id = pk
             file.created_by = request.user
@@ -224,7 +228,8 @@ class AddCommentView(LoginRequiredMixin, View):
 
         if form.is_valid():
             comment = form.save(commit=False)
-            team = Team.objects.filter(created_by=request.user)[0]
+            #team = Team.objects.filter(created_by=request.user)[0]
+            team = self.request.user.userprofile.active_team
             comment.team = team
             comment.created_by = request.user
             comment.lead_id = pk

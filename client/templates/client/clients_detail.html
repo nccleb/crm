@@ -6,13 +6,18 @@
     <div class="py-6 px-6">
         <h1 class="mb-4 text-xl">{{ client.name }}</h1>
 
+        
+
+        <p class="font-semibold">Address</p>
+        <p class="mb-2">{{ client.address }}</p>
+
+        <p class="font-semibold">Number</p>
+        <p class="mb-2">{{ client.phone_number }}</p>
+
         {% if client.description %}
             <p class="font-semibold">Description</p>
             <p class="mb-2">{{ client.description }}</p>
         {% endif %}
-         
-        <p class="font-semibold">Number</p>
-        <p class="mb-2">{{ client.phone_number }}</p>
 
         <p class="font-semibold">Created at</p>
         <p class="mb-2">{{ client.created_at }}</p>

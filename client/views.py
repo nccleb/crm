@@ -20,7 +20,7 @@ def clients_export(request):
     )
 
     writer = csv.writer(response)
-    writer.writerow(['Client','phone_number', 'Description', 'Created at', 'Created by'])
+    writer.writerow(['Client','address','phone_number', 'Description', 'Created at', 'Created by'])
 
     for client in clients:
         writer.writerow([client.name,client.phone_number, client.description, client.created_at, client.created_by])
@@ -87,7 +87,7 @@ def clients_add(request):
    if request.method =='POST':  
      form = AddClientForm(request.POST)
      if form.is_valid():
-            #team = Team.objects.filter(created_by=request.user)[0]
+            
             client = form.save(commit=False)
             
             
@@ -95,7 +95,16 @@ def clients_add(request):
             client.team = request.user.userprofile.active_team
             client.save()
             messages.success(request, f"the client was created!")
+
+     else:
+          messages.success(request, f"the client was not  created!")      
      return redirect('clients:list')
+     
+            
+            
+           
+        
+     
    else:
      form = AddClientForm() 
      

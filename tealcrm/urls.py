@@ -5,7 +5,7 @@ from django.contrib.auth import views
 from django.urls import include, path
 from core.views import UserLogoutView, about, index
 from dashboard.views import dashboard
-from lead.views import leads_list
+from lead.views import leads_list,add_lead
 from userprofile.views import signup, myaccount
 from userprofile.forms import LoginForm
 from django.contrib.auth.views import LogoutView
@@ -32,5 +32,6 @@ urlpatterns = [
     path('dashboard/teams/', include('team.urls')),
     path('dashboard/leads/', include('lead.urls')),
     path('admin/', admin.site.urls),
+    path('add_lead/',add_lead, name='add_lead' ),
      
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

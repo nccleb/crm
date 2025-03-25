@@ -1,7 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.core.exceptions import ValidationError
 from team.models import Team
+
+def only_int(value): 
+    if value.isdigit()==False:
+        raise ValidationError('ID contains characters')
+
 
 class Lead(models.Model):
     LOW = 'low'
@@ -28,10 +33,10 @@ class Lead(models.Model):
 
     team = models.ForeignKey(Team, related_name='leads', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    phone_number = models.CharField(null=True, max_length=254, blank=True)
+    phone_number = models.CharField(validators=[only_int],null=True, max_length=254, blank=True,unique=True )
     email = models.EmailField()
     description = models.TextField(blank=True, null=True)
-    #address = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
     priority = models.CharField(max_length=10, choices=CHOICES_PRIORITY, default=MEDIUM)
     status = models.CharField(max_length=10, choices=CHOICES_STATUS, default=NEW)
     converted_to_client = models.BooleanField(default=False)

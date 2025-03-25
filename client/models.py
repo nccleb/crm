@@ -1,16 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from team.models import Team
+from django.core.exceptions import ValidationError
+
+
+def only_int(value): 
+    if value.isdigit()==False:
+        raise ValidationError('ID contains characters')
 
 class Client(models.Model):
    
     
     team = models.ForeignKey(Team, related_name='clients', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    phone_number = models.CharField(null=True, max_length=254, blank=True)
+    phone_number = models.CharField(validators=[only_int],null=True, max_length=254, blank=True, unique=True)
     email = models.EmailField()
     description = models.TextField(blank=True, null=True)
-    #address = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
     
     created_by = models.ForeignKey(User, related_name='clients', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

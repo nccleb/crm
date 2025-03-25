@@ -6,13 +6,19 @@
     <div class="py-6 px-6">
         <h1 class="mb-4 text-xl">{{ lead.name }}</h1>
 
-        {% if lead.description %}
-            <p class="font-semibold">Description</p>
-            <p class="mb-2">{{ lead.description }}</p>
+        
+        {% if lead.address %}
+        <p class="font-semibold">Address</p>
+        <p class="mb-2">{{ lead.address }}</p>
         {% endif %}
 
         <p class="font-semibold">Number</p>
         <p class="mb-2">{{ lead.phone_number }}</p>
+
+        {% if lead.description %}
+            <p class="font-semibold">Description</p>
+            <p class="mb-2">{{ lead.description }}</p>
+        {% endif %}
 
 
         <p class="font-semibold">Priority</p>
