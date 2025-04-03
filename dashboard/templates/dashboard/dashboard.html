@@ -17,7 +17,7 @@
                     <p class="text-xs">Status: {{ lead.get_status_display }}</p>
                     <p class="text-xs">Priority: {{ lead.get_priority_display }}</p>
 
-                    <a href="{% url 'leads:detail' lead.pk %}">Details</a>
+                    <a href="{% url 'leads:leads_detail' lead.pk %}">Details</a>
                 </div>
             {% endfor %}
         </div>

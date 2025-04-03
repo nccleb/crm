@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import AddCommentForm, AddFileForm
 
 
-""""  
+
 class LeadListView(ListView):
     model = Lead
 
@@ -27,7 +27,7 @@ def get_queryset(self):
      team = Team.objects.filter(created_by=self.request.user)[0]
      lead = Lead.objects.filter(created_by=self.request.user)
      return queryset.filter(lead=lead,team=team,created_by=self.request.user, converted_to_client=False)
-""" 
+
     
     
 
@@ -35,7 +35,7 @@ def get_queryset(self):
 
 @login_required
 def leads_list(request):
-    leads = Lead.objects.filter(created_by=request.user,converted_to_client=False)
+    leads = Lead.objects.filter(converted_to_client=False)
 
     return render(request, 'lead/leads_list.html',{
        'leads': leads   
@@ -62,16 +62,19 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
         return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
     
 
-""""
+
+
 @login_required
 def leads_detail(request,pk):
-    lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
+    lead = get_object_or_404(Lead,  pk=pk)
     
 
     return render(request, 'lead/leads_detail.html',{
        'lead': lead   
     })
-"""
+
+
+
 class LeadDeleteView(LoginRequiredMixin, DeleteView):
     model = Lead
     success_url = reverse_lazy('leads_list')
@@ -80,21 +83,23 @@ class LeadDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         queryset = super(LeadDeleteView, self).get_queryset()
-        #team = self.request.user.userprofile.active_team
+        
 
-        return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
+        return queryset.filter( pk=self.kwargs.get('pk'))
     
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
 
-""""
+
 @login_required
 def leads_delete(request,pk):
     lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
     lead.delete()
     messages.success(request, f"the lead was deleted!")
     return redirect('leads:list')
- """      
+
+
+      
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     model = Lead
@@ -113,13 +118,14 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
         queryset = super(LeadUpdateView, self).get_queryset()
         #team = self.request.user.userprofile.active_team
 
-        return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
+        return queryset.filter( pk=self.kwargs.get('pk'))
 
 
 
 
 
-""""
+
+
 @login_required
 def leads_edit(request,pk):
    lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
@@ -141,8 +147,10 @@ def leads_edit(request,pk):
    return render(request, 'lead/leads_edit.html',{
     'form':form
  })
-"""
-""""
+
+
+
+
 
 class LeadCreateView(LoginRequiredMixin, CreateView):
     model = Lead
@@ -170,7 +178,7 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         
         return redirect(self.get_success_url())
 
-"""""
+
 
 @login_required
 def add_lead(request):
@@ -245,10 +253,10 @@ class ConvertToClientView(LoginRequiredMixin, View):
         pk = self.kwargs.get('pk')
 
         team = self.request.user.userprofile.active_team
-        #team = Team.objects.filter(created_by=request.user)[0]
+       
         lead = get_object_or_404(Lead, team=team, pk=pk)
 
-        #team = self.request.user.userprofile.get_active_team()
+       
 
         client = Client.objects.create(
             name=lead.name,
@@ -281,7 +289,10 @@ class ConvertToClientView(LoginRequiredMixin, View):
         return redirect('leads_list')
 
 
-"""
+
+
+
+
 @login_required
 def convert_to_client(request,pk):
     lead = get_object_or_404(Lead, created_by=request.user, pk=pk)
@@ -300,4 +311,4 @@ def convert_to_client(request,pk):
     lead.save()
     messages.success(request, f"the lead was converted to a client!")   
     return redirect('/leads:list/')
-   """
+   

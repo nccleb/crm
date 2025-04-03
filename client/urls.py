@@ -13,4 +13,6 @@ urlpatterns = [
     path('<int:pk>/add-file/', views.clients_add_file, name='add_file'),
     path('add/', views.clients_add, name='add'),
     path('export/', views.clients_export, name='export'),
+    path('search/', views.clients_search, name='search'),
+    path('search_n/', views.clients_search_n, name='search_n'),
 ]
