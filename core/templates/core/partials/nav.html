@@ -9,7 +9,7 @@
         <div
             class="nav-links duration-500 md:static absolute bg-teal-300 md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5   ">
             <ul class="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8"  style="color:teal;"    >
-                <li><a href="{% url 'about' %}"           class="py-4 px-1 ">Newest Call</a></li>
+                <li><a href="{% url 'getfirstline' %}"           class="py-4 px-1 ">Newest Call</a></li>
                 {% if request.user.is_authenticated %}
                 <li> <a href="{% url 'team:detail' active_team.id %}"         >{{ active_team.name }}</a></li>
                     <li>   <a href="{% url 'dashboard' %}" style="color:SeaGreen;"   >Dashboard</a></li>

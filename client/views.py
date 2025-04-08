@@ -12,7 +12,7 @@ from team.models import Team
 @login_required
 def clients_export(request):
     team = request.user.userprofile.active_team
-    #team = Team.objects.filter(created_by=request.user)[0]
+    
     clients = team.clients.all()
 
     response = HttpResponse(
@@ -83,7 +83,7 @@ def clients_add_file(request, pk):
 def clients_detail(request,pk):
     
     client = get_object_or_404(Client, pk=pk)
-    #team = Team.objects.filter(created_by=request.user)[0]
+   
     if request.method == 'POST':
         form = AddCommentForm(request.POST)
 

@@ -7,17 +7,37 @@
 <div class="flex space-x-4">
     <div class="w-1/2 px-4 py-6 bg-gray-100 rounded-xl leads">
         <h2 class="mb-4 text-lg">Newest Call</h2>
+        <h3 class="font-semibold">{{ cliens }}</h3>
+       
+       
+       
+       
+       
 
-        {% for lead in leads %}
+        {% for number in numbers %}
+         
+        {% if number.phone_number in cliens %}
             <div class="mb-2 lead">
-                <h3 class="font-semibold">{{ lead.name }}</h3>
-
-                <p class="text-xs">Status: {{ lead.get_status_display }}</p>
-                <p class="text-xs">Priority: {{ lead.get_priority_display }}</p>
-
-                <a href="{% url 'leads:leads_detail' lead.pk %}">Details</a>
+                
+                <h3 class="font-semibold">{{ number.name }}</h3>
+                <h3 class="font-semibold">{{ number.address }}</h3>
+               
+                
             </div>
+
+            {% endif %}
         {% endfor %}
-    </div>
+
+
+        
+        
+        
+    
+
+
+        
+        
+</div>
+</div>
 </div>
 {% endblock %}
