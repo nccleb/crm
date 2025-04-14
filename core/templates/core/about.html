@@ -1,13 +1,36 @@
-{% extends 'core/base.html' %}
+{% load static  %}
 
-{% block title %}About{% endblock %}
+<!doctype html>
 
-{% block content %}
-<div class="py-6 px-6">
+<html>
+    <head>
+       
+
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'main.min.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{% static 'test371.js' %}"></script>
+         <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+        
+    </head>
+    {% include 'core/partials/nav.html' %}
+    <body onload="on()">
+       
+
+
+<div  class="py-6 px-6">
 <div class="flex space-x-4">
-    <div class="w-1/2 px-4 py-6 bg-gray-100 rounded-xl leads">
+    <div  class="w-1/2 px-4 py-6 bg-gray-100 rounded-xl leads">
         <h2 class="mb-4 text-lg">Newest Call</h2>
-        <h3 class="font-semibold">{{ cliens }}</h3>
+        
        
        
        
@@ -17,11 +40,12 @@
         {% for number in numbers %}
          
         {% if number.phone_number in cliens %}
-            <div class="mb-2 lead">
-                
+            <div    id="id"        class="mb-2 lead">
+                <h3 class="font-semibold">{{ cliens }}</h3>
+                    
                 <h3 class="font-semibold">{{ number.name }}</h3>
                 <h3 class="font-semibold">{{ number.address }}</h3>
-               
+                <a href="{% url 'clients:detail' number.pk %}">Details</a>
                 
             </div>
 
@@ -40,4 +64,8 @@
 </div>
 </div>
 </div>
-{% endblock %}
+
+
+{% include 'core/partials/footer.html' %}
+</body>
+</html>
