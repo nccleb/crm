@@ -261,6 +261,7 @@ class ConvertToClientView(LoginRequiredMixin, View):
         client = Client.objects.create(
             name=lead.name,
             phone_number=lead.phone_number,
+            address=lead.address,
             email=lead.email,
             description=lead.description,
             created_by=request.user,
