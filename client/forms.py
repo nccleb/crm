@@ -19,3 +19,5 @@ class AddFileForm(forms.ModelForm):
     class Meta:
         model = ClientFile
         fields = ('file',)      
+
+           

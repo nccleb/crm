@@ -1,4 +1,5 @@
 import csv
+import psycopg2
 from django.db.models import Q
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
@@ -21,12 +22,43 @@ def clients_export(request):
     )
 
     writer = csv.writer(response)
-    writer.writerow(['Client','address','phone_number', 'Description', 'Created at', 'Created by'])
+    writer.writerow(['Name','Email','Description', 'Created at', 'Modified at','Created by','team','phone_number','address'  ])
 
     for client in clients:
-        writer.writerow([client.name,client.phone_number, client.description, client.created_at, client.created_by])
+        writer.writerow([client.name,client.email,client.description,client.created_at, client.modified_at, client.created_by,client.team, client.phone_number,client.address])
     
     return response
+
+
+
+
+@login_required
+def ingest_data(request):
+   
+    conn = psycopg2.connect("host = 127.0.0.1 dbname = mydatabase user = postgres password = A1A1a1a1 ")
+   
+    #connect to POSTGRESQL
+    #conn = connect_to_db()
+    cur = conn.cursor()
+    #open the csv file
+    with open('C:\data.csv','r') as file:
+        data_reader = csv.reader(file)
+        next(data_reader) #skip the header row
+        #insert each header row into the table 
+        for row in data_reader:
+           cur.execute("INSERT INTO client_client (name,email,description,phone_number,address) values (%s,%s,%s,%s,%s)", row)
+    #commit and close the connection
+    conn.commit() 
+    cur.close
+    conn.close
+    messages.success(request, f"Data ingested successfully")      
+    return redirect('clients:list')
+    #return HttpResponse("Data ingested successfully")
+    #print("Data ingested successfully")    
+    if __name__=="__main__":
+        ingest_data() 
+
+
 
 
 @login_required
@@ -74,7 +106,7 @@ def clients_add_file(request, pk):
             file.created_by = request.user
             file.save()
 
-            return redirect('clients:detail', pk=pk)
+           
     return redirect('clients:detail', pk=pk)
 
 

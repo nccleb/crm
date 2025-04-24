@@ -35,21 +35,30 @@
        
        
        
-       
-
+         
+        <h3 id="id2" class="font-semibold">{{ cliens }}</h3>   
         {% for number in numbers %}
          
         {% if number.phone_number in cliens %}
-            <div    id="id"        class="mb-2 lead">
-                <h3 class="font-semibold">{{ cliens }}</h3>
-                    
+                <div    id="id"        class="mb-2 lead">
+               
+                
                 <h3 class="font-semibold">{{ number.name }}</h3>
                 <h3 class="font-semibold">{{ number.address }}</h3>
                 <a href="{% url 'clients:detail' number.pk %}">Details</a>
                 
-            </div>
+                </div>
+            
+           
+            
+           
+            
+        {% endif %}
 
-            {% endif %}
+             
+            
+            
+
         {% endfor %}
 
 

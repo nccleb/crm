@@ -96,7 +96,7 @@ def getfirstline(request):
      
       
        last_line = last_line[27:]
-      #parm_dict = {'phone_number': last_line}
+       #parm_dict = {'phone_number': last_line}
        request.session['idempresa'] =  last_line
       
     
