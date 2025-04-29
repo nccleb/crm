@@ -1,6 +1,6 @@
 function prev(){
      
-show()+show2();
+show();
   }
 
 

@@ -36,11 +36,18 @@
        
        
          
-        <h3 id="id2" class="font-semibold">{{ cliens }}</h3>   
+        <div id="id" class="font-semibold">
+            {{ cliens }}<br>
+
+            <script>
+               let  spears = 0;
+               
+                </script>   
+              
         {% for number in numbers %}
          
         {% if number.phone_number in cliens %}
-                <div    id="id"        class="mb-2 lead">
+                <div           class="mb-2 lead">
                
                 
                 <h3 class="font-semibold">{{ number.name }}</h3>
@@ -48,9 +55,13 @@
                 <a href="{% url 'clients:detail' number.pk %}">Details</a>
                 
                 </div>
-            
-           
-            
+        </div> 
+       <script>
+        spears = 1;
+       </script>
+        
+
+        
            
             
         {% endif %}
@@ -60,6 +71,22 @@
             
 
         {% endfor %}
+        <p id="menu"></div>
+
+         <script>
+         if( spears == 0)
+         window.onload = function() {
+    document.getElementById("menu").innerHTML = ' <a href="/dashboard/clients/add/  " class="inline-block py-4 px-6 bg-teal-600 rounded-xl text-white">Add client</a>'
+         }       
+       // document.getElementById("menu").innerHTML='<a  href="/" class="inline-block py-4 px-6 bg-teal-600 rounded-xl text-white">Add client</a>'
+        </script>
+       
+
+
+
+
+
+
 
 
         

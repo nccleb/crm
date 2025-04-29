@@ -32,6 +32,7 @@ def getfirstline(request):
     today = datetime.date.today()
     month = today.month
     year = today.year
+    spears = 0
     lenmonth = len(str(month))
     if lenmonth > 1:
      path = "C:\Mdr\CallerID"
@@ -65,6 +66,7 @@ def getfirstline(request):
         'years': year,
         'months': month,
         'numbers': clients,
+        'spears': spears,
         
         })
       
@@ -106,6 +108,6 @@ def getfirstline(request):
         'years': year,
         'months': month,
         'numbers': clients,
-        
+         'spears': spears,
         })
                            
