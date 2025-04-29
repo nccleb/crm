@@ -1,4 +1,5 @@
 import csv
+
 import psycopg2
 from django.db.models import Q
 from django.contrib import messages
@@ -6,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Client
-from .forms import AddClientForm, AddCommentForm, AddFileForm
+from .forms import AddClientForm, AddCommentForm, AddFileForm, AdddClientForm
 from team.models import Team
 
 
@@ -165,6 +166,45 @@ def clients_add(request):
    return render(request, 'client/clients_add.html',{
     'form':form
  })
+
+
+@login_required
+def clients_addd(request):
+   if request.method =='POST':  
+     form = AddClientForm(request.POST)
+     if form.is_valid():
+            
+            client = form.save(commit=False)
+            
+            client.phone_number = "05600015"
+            client.created_by = request.user
+            client.team = request.user.userprofile.active_team
+            client.save()
+            messages.success(request, f"the client was created!")
+
+     else:
+          messages.success(request, f"the client was not  created!")      
+     return redirect('clients:list')
+     
+            
+            
+           
+        
+     
+   else:
+     form = AdddClientForm() 
+     
+   return render(request, 'client/clients_addd.html',{
+    'form':form
+ })
+     
+  
+
+
+
+
+
+
 
 @login_required
 def clients_edit(request, pk):

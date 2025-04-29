@@ -59,7 +59,8 @@ class LeadDetailView(LoginRequiredMixin, DetailView):
         queryset = super(LeadDetailView, self).get_queryset()
         #team = self.request.user.userprofile.active_team
 
-        return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
+       # return queryset.filter(created_by=self.request.user, pk=self.kwargs.get('pk'))
+        return queryset.filter( pk=self.kwargs.get('pk'))
     
 
 

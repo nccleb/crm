@@ -7,7 +7,10 @@ class AddClientForm(forms.ModelForm):
         model = Client
         fields = ('name','address','phone_number', 'email', 'description',)
 
-
+class AdddClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ('name','address', 'email', 'description',)
 
 class AddCommentForm(forms.ModelForm):
     class Meta:
