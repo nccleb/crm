@@ -17,4 +17,5 @@ urlpatterns = [
     path('import/', views.ingest_data, name='import'),
     path('search/', views.clients_search, name='search'),
     path('search_n/', views.clients_search_n, name='search_n'),
+  
 ]

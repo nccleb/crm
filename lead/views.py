@@ -104,7 +104,7 @@ def leads_delete(request,pk):
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):
     model = Lead
-    fields = ('name','address','phone_number', 'email', 'description', 'priority', 'status',)
+    fields = ('name','address','phone_number','other', 'email', 'description', 'priority', 'status',)
     success_url = reverse_lazy('leads_list')
 
     
@@ -155,7 +155,7 @@ def leads_edit(request,pk):
 
 class LeadCreateView(LoginRequiredMixin, CreateView):
     model = Lead
-    fields = ('name','address','phone_number', 'email', 'description', 'priority', 'status',)
+    fields = ('name','address','phone_number','other','email', 'description', 'priority', 'status',)
     success_url = reverse_lazy('leads_list')
 
     
@@ -262,6 +262,7 @@ class ConvertToClientView(LoginRequiredMixin, View):
         client = Client.objects.create(
             name=lead.name,
             phone_number=lead.phone_number,
+            other=lead.other,
             address=lead.address,
             email=lead.email,
             description=lead.description,

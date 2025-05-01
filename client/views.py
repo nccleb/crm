@@ -78,10 +78,13 @@ def clients_search_n(request):
    
     phone_number = request.GET.get('search_n', False)
     clients =  Client.objects.filter(Q(phone_number__icontains = phone_number))
-
+    clients2 =  Client.objects.filter(Q(other__icontains = phone_number))
     return render(request, 'client/clients_search.html', {
-        'clients': clients
+        'clients': clients,
+        'clients2': clients2,
     })
+
+
 
 
 @login_required
@@ -169,14 +172,18 @@ def clients_add(request):
 
 
 @login_required
+
 def clients_addd(request):
    if request.method =='POST':  
      form = AddClientForm(request.POST)
      if form.is_valid():
             
+             
+            
+             
             client = form.save(commit=False)
             
-            client.phone_number = "05600015"
+            client.phone_number = "request.COOKIES.get('my_cookie', '999')"
             client.created_by = request.user
             client.team = request.user.userprofile.active_team
             client.save()

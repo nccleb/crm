@@ -31,18 +31,22 @@
     <div  class="w-1/2 px-4 py-6 bg-gray-100 rounded-xl leads">
         <h2 class="mb-4 text-lg">Newest Call</h2>
         
+      
+            {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+          
        
-       
-       
-       
+     
          
-        <div id="id" class="font-semibold">
+        <div id="id"  class="font-semibold">
             {{ cliens }}<br>
             
-            <script>
-               let  spears = 0;
-               
-                </script>   
+           
               
         {% for number in numbers %}
          
@@ -55,10 +59,8 @@
                 <a href="{% url 'clients:detail' number.pk %}">Details</a>
                 
                 </div>
-        </div> 
-       <script>
-        spears = 1;
-       </script>
+        
+       
         
 
         
@@ -71,18 +73,10 @@
             
 
         {% endfor %}
-        <p id="menu"></div>
-
-         <script>
-         if( spears == 0)
-         window.onload = function() {
-    document.getElementById("menu").innerHTML = ' <a href="/dashboard/clients/addd/  " class="inline-block py-4 px-6 bg-teal-600 rounded-xl text-white">Add client</a>'
-         }       
-       // document.getElementById("menu").innerHTML='<a  href="/" class="inline-block py-4 px-6 bg-teal-600 rounded-xl text-white">Add client</a>'
-        </script>
+        
+    </div> 
        
-       
-
+        <a href="{% url 'clients:add'  %}" class="inline-block py-4 px-6 bg-teal-600 rounded-xl text-white">Add client</a>     
 
 
 
