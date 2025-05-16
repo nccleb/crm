@@ -1,3 +1,4 @@
+from ast import arg
 import csv
 
 import psycopg2
@@ -23,10 +24,10 @@ def clients_export(request):
     )
 
     writer = csv.writer(response)
-    writer.writerow(['Name','Email','Description', 'Created at', 'Modified at','Created by','team','phone_number','address'  ])
+    writer.writerow(['Name','Email','Description', 'Created at', 'Modified at','Created by','team','phone_number','other','address'  ])
 
     for client in clients:
-        writer.writerow([client.name,client.email,client.description,client.created_at, client.modified_at, client.created_by,client.team, client.phone_number,client.address])
+        writer.writerow([client.name,client.email,client.description,client.created_at, client.modified_at, client.created_by,client.team, client.phone_number,client.other,client.address])
     
     return response
 
@@ -47,7 +48,8 @@ def ingest_data(request):
         next(data_reader) #skip the header row
         #insert each header row into the table 
         for row in data_reader:
-           cur.execute("INSERT INTO client_client (name,email,description,phone_number,address) values (%s,%s,%s,%s,%s)", row)
+           #messages.success(request, f"Data entered successfully")   
+           cur.execute("INSERT INTO client_client (name,email,description,phone_number,other,address) VALUES(%s,%s,%s,%s,%s,%s)",(row[0],row[1],row[2],row[3],row[4],row[5]) )
     #commit and close the connection
     conn.commit() 
     cur.close

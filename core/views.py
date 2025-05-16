@@ -36,7 +36,7 @@ def getfirstline(request):
     
     lenmonth = len(str(month))
     if lenmonth > 1:
-     path = "C:\Mdr\CallerID"
+     path = "c:\CaCallStatus.dat"
     
      
      
@@ -44,7 +44,7 @@ def getfirstline(request):
     
     
     
-     with open( path+str(year)+'-'+str(month)+'.txt','r') as f:
+     with open( path,'r') as f:
        try:  # catch OSError in case of a one line file 
          f.seek(-2, os.SEEK_END)
          while f.read(1) != b'\n':
@@ -83,13 +83,13 @@ def getfirstline(request):
      year = today.year
      lenmonth = len(str(month))
     
-     path = "C:\Mdr\CallerID"
+     path = "c:\CaCallStatus.dat"
    
 
      
      
     try:
-     with open( path+str(year)+'-'+'0'+str(month)+'.txt','r') as f:
+     with open( path,'r') as f:
       
        try:  # catch OSError in case of a one line file 
          f.seek(-2, os.SEEK_END)
@@ -104,7 +104,7 @@ def getfirstline(request):
        last_line =  f.readlines()[-1]
      
       
-       last_line = last_line[27:]
+       last_line = last_line[0:8]
        #parm_dict = {'phone_number': last_line}
        request.session['idempresa'] =  last_line
        #response = HttpResponse("Cookie is set!")
@@ -127,7 +127,110 @@ def getfirstline(request):
         })
     
     
+     
+  # def getfirstline(request):
+  #   today = datetime.date.today()
+  #   month = today.month
+  #   year = today.year
+    
+  #   lenmonth = len(str(month))
+  #   if lenmonth > 1:
+  #    path = "C:\Mdr\CallerID"
+    
+     
+     
+     
+    
+    
+    
+  #    with open( path+str(year)+'-'+str(month)+'.txt','r') as f:
+  #      try:  # catch OSError in case of a one line file 
+  #        f.seek(-2, os.SEEK_END)
+  #        while f.read(1) != b'\n':
+  #           f.seek(-2, os.SEEK_CUR)
+  #      except OSError:
+  #       f.seek(0)
+    
+    
+
+  #      last_line =  f.readlines()[-1]
+     
       
+  #      last_line = last_line[27:]
+      
+  #      request.session['idempresa'] =  last_line
+       
+      
+
+  #      clients = Client.objects.all()
+        
+       
+        
+  #      return render(request, 'core/about.html', {
+  #       'cliens': last_line,
+  #       'years': year,
+  #       'months': month,
+  #       'numbers': clients,
+        
+        
+  #       })
+      
+    
+  #   else:
+  #    today = datetime.date.today()
+  #    month = today.month
+  #    year = today.year
+  #    lenmonth = len(str(month))
+    
+  #    path = "C:\Mdr\CallerID"
+   
+
+     
+     
+  #   try:
+  #    with open( path+str(year)+'-'+'0'+str(month)+'.txt','r') as f:
+      
+  #      try:  # catch OSError in case of a one line file 
+  #        f.seek(-2, os.SEEK_END)
+  #        while f.read(1) != b'\n':
+  #           f.seek(-2, os.SEEK_CUR)
+  #      except OSError:
+  #       f.seek(0)
+     
+         
+    
+
+  #      last_line =  f.readlines()[-1]
+     
+      
+  #      last_line = last_line[27:]
+  #      #parm_dict = {'phone_number': last_line}
+  #      request.session['idempresa'] =  last_line
+  #      #response = HttpResponse("Cookie is set!")
+  #      #response.set_cookie('my_cookie', last_line)
+    
+  #      clients = Client.objects.all()
+  #      return render(request, 'core/about.html', {
+  #       'cliens': last_line,
+  #       'years': year,
+  #       'months': month,
+  #       'numbers': clients,
+         
+  #       })
+    
+  #   except FileNotFoundError:
+  #    return render(request, 'core/about.html', {
+  #       'messages':['No calls as of yet!'],
+        
+         
+  #       })
+    
+    
+      
+  
+    
+
+
   
     
 
