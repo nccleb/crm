@@ -20,7 +20,7 @@ urlpatterns = [
     path('signup/',signup,name='signup'),
     path('log-in/', views.LoginView.as_view(template_name='userprofile/login.html', authentication_form=LoginForm), name='login'),
     path('logout/', UserLogoutView.as_view(http_method_names = ['get', 'post', 'options'] ), name='logout'),
-    
+   
     path('dashboard/',dashboard,name='dashboard'),
     #path('add_lead/', add_lead, name='add_lead'),
     path('leads_list/',leads_list, name='leads_list' ),
