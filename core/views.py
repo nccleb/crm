@@ -206,12 +206,12 @@ def getfirstline(request):
         else:
             caller_id = "No active channels found"
             
-            # Optionally save "no channels" status (you can remove this if not needed)
+            # Create blank file when no incoming calls
             try:
                 with open(latest_call_file, 'w') as f:
-                    f.write(f"NO_CHANNELS,{formatted_datetime}")
+                    f.write("")  # Write empty string to make file blank
                 
-                print(f"No channels found at: {formatted_datetime}")
+                print(f"No channels found at: {formatted_datetime} - Created blank file")
                 
             except Exception as file_error:
                 print(f"File save error: {str(file_error)}")
@@ -253,11 +253,22 @@ def get_latest_call_for_pos(request):
         
         if os.path.exists(latest_call_file):
             with open(latest_call_file, 'r') as f:
-                data = f.read().strip().split(',')
-                if len(data) >= 2:
+                data = f.read().strip()
+                
+                # Check if file is blank
+                if not data:
                     return JsonResponse({
-                        'caller_id': data[0],
-                        'datetime': data[1],
+                        'caller_id': '',
+                        'datetime': '',
+                        'status': 'no_data'
+                    })
+                
+                # Parse data if not blank
+                data_parts = data.split(',')
+                if len(data_parts) >= 2:
+                    return JsonResponse({
+                        'caller_id': data_parts[0],
+                        'datetime': data_parts[1],
                         'status': 'success'
                     })
         
