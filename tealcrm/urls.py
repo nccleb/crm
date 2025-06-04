@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import include, path
-from core.views import UserLogoutView, about, index, getfirstline
+from core.views import UserLogoutView,  index, getfirstline
 from dashboard.views import dashboard
 from lead.views import leads_list,add_lead
 from userprofile.views import signup, myaccount
@@ -14,6 +14,7 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     #path('about/',about,name='about'),
+   
     path('getfirstline/',getfirstline,name='getfirstline'),
     path('myaccount/',myaccount,name='myaccount'),
     path('index/',index,name='index'),
