@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Statistics</title>
+    
+    <!-- Include your CSS files -->
+    <link rel="stylesheet" href="{% static 'css/stylei.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylei2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/whatsappButton.css' %}">
+    
+    <!-- Include your JavaScript -->
+    <script src="{% static 'js/test371.js' %}"></script>
+</head>
+<body onload="size242()">
+    <div class="jumbotron">
+        <p style="text-align:center;font-size:25px;" id="form">Total Statistics</p>
+        
+        <!-- Display Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        {% if api_data.reload_required %}
+            <button style="color:blue" type="button" class="whatsappbutton" id="form" onclick="refresh()">
+                <h4 style="color:Tomato;">Please Reload!</h4>
+            </button>
+        {% else %}
+            <table>
+                <tr>
+                    <th>queuechairman</th>
+                    <th>total_calls</th>
+                    <th>abandoned_rate</th>
+                    <th>avg_wait</th>
+                    <th>avg_talk</th>
+                    <th>vq_total_calls</th>
+                </tr>
+                <tr>
+                    <td><a>{{ api_data.queuechairman }}</a></td>
+                    <td><a>{{ api_data.total_calls }}</a></td>
+                    <td><a>{{ api_data.abandoned_rate }}</a></td>
+                    <td><a>{{ api_data.avg_wait }}</a></td>
+                    <td><a>{{ api_data.avg_talk }}</a></td>
+                    <td><a>{{ api_data.vq_total_calls }}</a></td>
+                </tr>
+            </table>
+        {% endif %}
+        
+        <button class="whatsappbutton printPageButton" type="button" id="form" onclick="printContents('form')">Print</button>
+        <button class="whatsappbutton printPageButton" type="button" id="form" onclick="quit()">Quit</button>
+        <button class="whatsappbutton printPageButton" type="button" id="form" onclick="refresh()">Reload</button>
+    </div>
+    
+    <script>
+        // JavaScript functions equivalent to your original JS
+        function quit() {
+            window.close();
+        }
+        
+        function refresh() {
+            location.reload();
+        }
+        
+        function printContents(elementId) {
+            var printContent = document.getElementById(elementId);
+            var windowObject = window.open('', '', 'width=800,height=600');
+            windowObject.document.write('<html><head><title>Print</title></head><body>');
+            windowObject.document.write(printContent.innerHTML);
+            windowObject.document.write('</body></html>');
+            windowObject.document.close();
+            windowObject.focus();
+            windowObject.print();
+            windowObject.close();
+        }
+        
+        // Add size242 function if it exists in your test371.js
+        function size242() {
+            // Add your size242 implementation here
+            console.log('Page loaded');
+        }
+    </script>
+</body>
+</html>

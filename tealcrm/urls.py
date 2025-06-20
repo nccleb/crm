@@ -40,6 +40,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test-api/', test_api, name='test_api'),
     path('add_lead/',add_lead, name='add_lead' ),
+    path('stotistics/', include('stotistics.urls', namespace='stotisticss')),
      
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

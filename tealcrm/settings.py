@@ -66,7 +66,7 @@ INSTALLED_APPS = [
      'team',
      'userprofile', 
      'queuestat',
-     
+     'stotistics',
      
       
      
