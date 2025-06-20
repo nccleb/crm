@@ -1,285 +1,208 @@
 import datetime
+import os
+import logging
 from django.contrib import messages
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import logout
-from django.contrib.auth.views import LogoutView
-import os
 from client.models import Client
-from team.models import Team
-from django.db.models import Q
-import glob
-from pathlib import Path
-import json
-import hashlib
-import requests
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
-import urllib3
-import ssl
-from django.utils import timezone
+
+# Set up logging
+logger = logging.getLogger(__name__)
+
 
 class UserLogoutView(LogoutView):
-
     def get(self, request):
         logout(request)
         return redirect('login')
-    
+
+
 def index(request):
-  #print(os.path.join(os.getcwd(), 'callerID2025-19.txt'))
-  return render(request,'core/index.html')
+    return render(request, 'core/index.html')
+
 
 def about(request):
- 
-  return render(request,'core/about.html')
+    return render(request, 'core/about.html')
 
 
-
-
-
-
-
-# Disable SSL warnings completely
-urllib3.disable_warnings()
-requests.packages.urllib3.disable_warnings()
-
-@csrf_exempt
-@require_http_methods(["GET", "POST"])
 def getfirstline(request):
     """
-    Django view to collect incoming caller ID from UCM6202 Grandstream API
-    and save it to CSV file for POS system
+    Ultra-simplified version - just reads the last line without any complex extraction
     """
+    today = datetime.date.today()
+    month = today.month
+    year = today.year
+    
+    # Use the exact path from your original code
+    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt"
+    
     try:
-        # API configuration
-        api_url = "http://192.168.20.216:8089/api"
-        username = "cdrapi"
-        password = "cdrapi123"
+        # Check if file exists
+        # if not os.path.exists(path):
+        #     logger.error(f"File not found: {path}")
+        #     messages.error(request, f'Caller ID file not found!')
+        #     return render(request, 'core/about.html', {
+        #         'messages': ['Caller ID file not found!'],
+        #         'years': year,
+        #         'months': month,
+        #     })
         
-        headers = {
-            "Connection": "close",
-            "Content-Type": "application/json",
-            "User-Agent": "Mozilla/5.0"
-        }
+        # # Check if file is empty
+        # if os.path.getsize(path) == 0:
+        #     logger.error(f"File is empty: {path}")
+        #     #messages.warning(request, 'Caller ID file is empty!')
+        #     return render(request, 'core/about.html', {
+        #         'messages': ['Caller ID file is empty!'],
+        #         'years': year,
+        #         'months': month,
+        #     })
         
-        # Create session with complete SSL bypass
-        session = requests.Session()
-        session.verify = False
-        session.trust_env = False
-        
-        # Try to use TLS 1.0 which older devices often support
-        try:
-            import ssl
-            session.mount('https://', requests.adapters.HTTPAdapter())
-        except:
-            pass
-        
-        # Step 1: Get challenge token
-        challenge_payload = {
-            "request": {
-                "action": "challenge",
-                "user": username
-            }
-        }
-        
-        print("Attempting challenge request...")  # Debug
-        
-        response = session.post(
-            api_url,
-            json=challenge_payload,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        print(f"Challenge response status: {response.status_code}")  # Debug
-        
-        if response.status_code != 200:
-            return JsonResponse({
-                "error": f"Failed to get challenge token. Status: {response.status_code}",
-                "response_text": response.text
-            }, status=500)
-        
-        challenge_data = response.json()
-        challenge = challenge_data['response']['challenge']
-        
-        # Step 2: Create MD5 token
-        token = hashlib.md5((challenge + password).encode()).hexdigest()
-        
-        # Step 3: Login with token
-        login_payload = {
-            "request": {
-                "action": "login",
-                "token": token,
-                "user": username
-            }
-        }
-        
-        print("Attempting login request...")  # Debug
-        
-        response = session.post(
-            api_url,
-            json=login_payload,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        if response.status_code != 200:
-            return JsonResponse({
-                "error": f"Login failed. Status: {response.status_code}",
-                "response_text": response.text
-            }, status=500)
-        
-        login_data = response.json()
-        cookie = login_data['response']['cookie']
-        
-        # Step 4: Get unbridged channels (caller ID)
-        channels_payload = {
-            "request": {
-                "action": "listUnBridgedChannels",
-                "cookie": cookie
-            }
-        }
-        
-        print("Attempting channels request...")  # Debug
-        
-        response = session.post(
-            api_url,
-            json=channels_payload,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        if response.status_code != 200:
-            return JsonResponse({
-                "error": f"Failed to get channels. Status: {response.status_code}",
-                "response_text": response.text
-            }, status=500)
-        
-        channels_data = response.json()
-        
-        # Get current datetime
-        current_datetime = datetime.datetime.now()
-        formatted_datetime = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
-        
-        # Define path for latest call file - adjust this path as needed for your POS system
-        latest_call_file = os.path.join(os.getcwd(), 'latest_call.txt')
-        # Alternative paths you might want to use:
-        # latest_call_file = 'C:/POS_Data/latest_call.txt'
-        # latest_call_file = '/var/www/shared/latest_call.txt'
-        
-        # Extract caller ID and save to file
-        if ('response' in channels_data and 
-            'channel' in channels_data['response'] and 
-            len(channels_data['response']['channel']) > 0):
+        # Read the file
+        with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+            lines = f.readlines()
             
-            caller_id = channels_data['response']['channel'][0]['callernum']
+            # if not lines:
+            #     logger.warning("No lines found in file")
+            #     messages.info(request, 'No calls as of yet!')
+            #     return render(request, 'core/about.html', {
+            #         'messages': ['No calls as of yet!'],
+            #         'years': year,
+            #         'months': month,
+            #     })
             
-            # Save latest call to single-line file for immediate POS access
-            try:
-                with open(latest_call_file, 'w') as f:
-                    f.write(f"{caller_id},{formatted_datetime}")
-                
-                print(f"Saved latest call: Caller: {caller_id}, Time: {formatted_datetime}")
-                
-            except Exception as file_error:
-                print(f"File save error: {str(file_error)}")
+            # Get the last line and clean it up
+            last_line = lines[-1].strip()
+            logger.info(f"Successfully read last line: '{last_line}'")
             
-            # Store in session (equivalent to $_SESSION['userinc'])
-            request.session['userinc'] = caller_id
+            # if not last_line:
+            #     logger.warning("Last line is empty")
+            #     messages.info(request, 'No recent calls found!')
+            #     return render(request, 'core/about.html', {
+            #         'messages': ['No recent calls found!'],
+            #         'years': year,
+            #         'months': month,
+            #     })
             
-            today = datetime.date.today()
-            month = today.month           
-            year = today.year
+            # Store the entire line in session (no extraction)
+            request.session['idempresa'] = last_line
+            
+            # Get clients
             clients = Client.objects.all()
             
+            # Success - show the caller info
+            #messages.success(request, f'Latest caller: {last_line}')
+            last_line = last_line[0:4]
             return render(request, 'core/about.html', {
-                'cliens': caller_id,
-                'years': year,
-                'months': month,
-                'numbers': clients,
-            })
-        else:
-            caller_id = "No active channels found"
-            
-            # Create blank file when no incoming calls
-            try:
-                with open(latest_call_file, 'w') as f:
-                    f.write("")  # Write empty string to make file blank
-                
-                print(f"No channels found at: {formatted_datetime} - Created blank file")
-                
-            except Exception as file_error:
-                print(f"File save error: {str(file_error)}")
-            
-            today = datetime.date.today()
-            month = today.month           
-            year = today.year
-            clients = Client.objects.all()
-            
-            return render(request, 'core/about.html', {
-                'cliens': caller_id,
+                'cliens': last_line,  # Full caller line
                 'years': year,
                 'months': month,
                 'numbers': clients,
             })
             
-    except requests.exceptions.SSLError as e:
-        # If SSL still fails, suggest using HTTP instead
-        return JsonResponse({
-            "error": f"SSL Error: {str(e)}", 
-            "suggestion": "Try changing the URL to HTTP (http://192.168.20.216:8089/api) if the device supports it"
-        }, status=500)
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({"error": f"Network error: {str(e)}"}, status=500)
-    except KeyError as e:
-        return JsonResponse({"error": f"Invalid API response format: {str(e)}"}, status=500)
+   
+    
+       
+    
+        
     except Exception as e:
-        return JsonResponse({"error": f"Unexpected error: {str(e)}"}, status=500)
-
-
-# Optional: Helper function to read latest call for POS system
-def get_latest_call_for_pos(request):
-    """
-    Simple endpoint that returns the latest call data in JSON format
-    for your POS system to consume
-    """
-    try:
-        latest_call_file = os.path.join(os.getcwd(), 'latest_call.txt')
-        
-        if os.path.exists(latest_call_file):
-            with open(latest_call_file, 'r') as f:
-                data = f.read().strip()
-                
-                # Check if file is blank
-                if not data:
-                    return JsonResponse({
-                        'caller_id': '',
-                        'datetime': '',
-                        'status': 'no_data'
-                    })
-                
-                # Parse data if not blank
-                data_parts = data.split(',')
-                if len(data_parts) >= 2:
-                    return JsonResponse({
-                        'caller_id': data_parts[0],
-                        'datetime': data_parts[1],
-                        'status': 'success'
-                    })
-        
-        return JsonResponse({
-            'caller_id': '',
-            'datetime': '',
-            'status': 'no_data'
+        #error_msg = f'Unexpected error reading caller ID file: {str(e)}'
+        #logger.error(error_msg)
+       # messages.error(request, 'Error reading caller ID file!')
+        return render(request, 'core/about.html', {
+            #'messages': ['Error reading caller ID file!'],
+            #'years': year,
+            #'months': month,
         })
-        
-    except Exception as e:
-        return JsonResponse({
-            'error': str(e),
-            'status': 'error'
-        }, status=500)
+
+
+def test_file_access(request):
+    """
+    Simple test function to check file access
+    """
+    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt"
+    
+    test_results = {
+        'file_path': path,
+        'exists': os.path.exists(path),
+        'is_file': os.path.isfile(path) if os.path.exists(path) else False,
+        'size': os.path.getsize(path) if os.path.exists(path) else 0,
+        'readable': False,
+        'content_preview': [],
+        'error': None
+    }
+    
+    if test_results['exists']:
+        try:
+            # Test if we can read the file
+            with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+                test_results['readable'] = True
+                
+                # Get last few lines for preview
+                lines = content.splitlines()
+                test_results['content_preview'] = lines[-5:] if len(lines) >= 5 else lines
+                test_results['total_lines'] = len(lines)
+                
+        except Exception as e:
+            test_results['error'] = str(e)
+    
+    return render(request, 'core/test_results.html', {
+        'test_results': test_results,
+        'today': datetime.date.today(),
+    })
+
+
+# Alternative function that tries multiple common file paths
+def getfirstline_auto_detect(request):
+    """
+    Try multiple possible file paths automatically
+    """
+    today = datetime.date.today()
+    month = today.month
+    year = today.year
+    
+    # List of possible file paths to try
+    possible_paths = [
+        r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt",
+        r"C:\Users\user\crm\django_env\tealcrm\callerID2025-19.txt",
+        r"C:\Mdr\CallerID\callerid.txt",
+        r"C:\CallerID\callerid.txt",
+        r".\callerid.txt",  # Current directory
+        r"callerid.txt",    # Just filename
+    ]
+    
+    for path in possible_paths:
+        try:
+            if os.path.exists(path) and os.path.getsize(path) > 0:
+                with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+                    lines = f.readlines()
+                    if lines:
+                        last_line = lines[-1].strip()
+                        if last_line:  # Make sure it's not empty
+                            request.session['idempresa'] = last_line
+                            clients = Client.objects.all()
+                            
+                            messages.success(request, f'Found caller ID file at: {path}')
+                            messages.info(request, f'Latest caller: {last_line}')
+                            
+                            return render(request, 'core/about.html', {
+                                'cliens': last_line,
+                                'years': year,
+                                'months': month,
+                                'numbers': clients,
+                                'file_path_used': path,  # For debugging
+                            })
+        except Exception as e:
+            logger.warning(f"Failed to read {path}: {e}")
+            continue
+    
+    # If we get here, no file was found
+    messages.error(request, 'No caller ID file found in any expected location!')
+    logger.error("No caller ID file found in any of the expected locations")
+    
+    return render(request, 'core/about.html', {
+        'messages': ['No caller ID file found!'],
+        'years': year,
+        'months': month,
+        'searched_paths': possible_paths,  # For debugging
+    })

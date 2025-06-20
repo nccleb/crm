@@ -3,8 +3,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import include, path
-from core.views import UserLogoutView,  index, getfirstline
+from core.views import UserLogoutView,  index, getfirstline, test_file_access
 from dashboard.views import dashboard
+from queuestat.views import test_api
+
+#from queuestat.views import queue_stat, queue_stat_detail
 from lead.views import leads_list,add_lead
 from userprofile.views import signup, myaccount
 from userprofile.forms import LoginForm
@@ -14,14 +17,14 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     #path('about/',about,name='about'),
-   
+    path('test-file/', test_file_access, name='test_file_access'),
     path('getfirstline/',getfirstline,name='getfirstline'),
     path('myaccount/',myaccount,name='myaccount'),
     path('index/',index,name='index'),
     path('signup/',signup,name='signup'),
     path('log-in/', views.LoginView.as_view(template_name='userprofile/login.html', authentication_form=LoginForm), name='login'),
     path('logout/', UserLogoutView.as_view(http_method_names = ['get', 'post', 'options'] ), name='logout'),
-   
+    
     path('dashboard/',dashboard,name='dashboard'),
     #path('add_lead/', add_lead, name='add_lead'),
     path('leads_list/',leads_list, name='leads_list' ),
@@ -31,9 +34,12 @@ urlpatterns = [
     #path('convert_to_client/<int:pk>/', convert_to_client, name='leads_convert'),
     path('', include('core.urls')),
     path('dashboard/clients/', include('client.urls')),
+    path('queue/', include('queuestat.urls', namespace='queuestats')),
     path('dashboard/teams/', include('team.urls')),
     path('dashboard/leads/', include('lead.urls')),
     path('admin/', admin.site.urls),
+    path('test-api/', test_api, name='test_api'),
     path('add_lead/',add_lead, name='add_lead' ),
      
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

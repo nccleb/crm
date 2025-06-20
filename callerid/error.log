@@ -1,0 +1,31 @@
+2025-06-06 15:52:43,242 - INFO - Starting Caller ID Monitor...
+2025-06-06 15:52:43,242 - INFO - Testing AMI connection...
+2025-06-06 15:52:43,242 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-06-06 15:52:43,246 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-06-06 15:52:43,249 - INFO - AMI authentication successful
+2025-06-06 15:52:43,249 - INFO - AMI connection test successful
+2025-06-06 15:52:43,250 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-06-06 15:52:43,257 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-06-06 15:52:43,259 - INFO - AMI authentication successful
+2025-06-06 15:52:55,030 - INFO - File updated: 6001 - 
+2025-06-06 15:53:05,096 - INFO - Call answered: DAHDI/o1-1
+2025-06-06 15:53:05,097 - INFO - Display cleared
+2025-06-06 15:53:45,871 - INFO - File updated: 6001 - 
+2025-06-06 15:53:56,010 - INFO - Call answered: DAHDI/o1-1
+2025-06-06 15:53:56,011 - INFO - Display cleared
+2025-06-06 15:55:41,853 - INFO - File updated: 6001 - 
+2025-06-06 15:55:51,689 - INFO - Call answered: DAHDI/o1-1
+2025-06-06 15:55:51,691 - INFO - Display cleared
+2025-06-06 15:56:28,705 - INFO - File updated: 6001 - 
+2025-06-06 15:56:39,461 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-06-06 15:56:39,462 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-06-06 15:56:44,464 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-06-06 15:56:44,479 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-06-06 15:56:44,482 - INFO - AMI authentication successful
+2025-06-06 15:56:44,483 - INFO - Reconnection successful
+2025-06-06 15:56:47,132 - INFO - File updated: 6001 - q1
+2025-06-06 15:56:47,321 - INFO - File updated: 6001 - q1
+2025-06-06 15:56:47,321 - INFO - Queue call: 6001 joined queue
+2025-06-06 15:56:52,558 - INFO - Call hung up: DAHDI/o1-1
+2025-06-06 15:56:52,559 - INFO - Display cleared
+2025-06-06 15:57:43,296 - INFO - AMI Monitor: Connection stable, monitoring for calls...

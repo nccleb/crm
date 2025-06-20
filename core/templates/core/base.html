@@ -20,7 +20,7 @@
 
     <body >
         {% include 'core/partials/nav.html' %}
-
+        
         {% if messages %}
             <div class="py-6 px-6">
                 {% for message in messages %}
@@ -33,7 +33,7 @@
 
         {% block content %}
         {% endblock %}
-
+        
         {% include 'core/partials/footer.html' %}
     </body>
 </html>
