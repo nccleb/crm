@@ -20,6 +20,11 @@ class UserLogoutView(LogoutView):
 def index(request):
     return render(request, 'core/index.html')
 
+def on(request):
+    return render(request, 'core/on.html')
+
+def off(request):
+    return render(request, 'core/off.html')
 
 def about(request):
     return render(request, 'core/about.html')
@@ -34,7 +39,7 @@ def getfirstline(request):
     year = today.year
     
     # Use the exact path from your original code
-    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt"
+    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\callerid.txt"
     
     try:
         # Check if file exists
@@ -119,7 +124,7 @@ def test_file_access(request):
     """
     Simple test function to check file access
     """
-    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt"
+    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\callerid.txt"
     
     test_results = {
         'file_path': path,
@@ -163,7 +168,7 @@ def getfirstline_auto_detect(request):
     
     # List of possible file paths to try
     possible_paths = [
-        r"C:\Users\user\crm\django_env\tealcrm\callerid\dist\callerid.txt",
+        r"C:\Users\user\crm\django_env\tealcrm\callerid\callerid.txt",
         r"C:\Users\user\crm\django_env\tealcrm\callerID2025-19.txt",
         r"C:\Mdr\CallerID\callerid.txt",
         r"C:\CallerID\callerid.txt",

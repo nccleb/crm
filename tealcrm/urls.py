@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import include, path
-from core.views import UserLogoutView,  index, getfirstline, test_file_access
+from core.views import UserLogoutView,  index, getfirstline, test_file_access,on,off
 from dashboard.views import dashboard
 from queuestat.views import test_api
 
@@ -17,6 +17,8 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     #path('about/',about,name='about'),
+    path('on/',on,name='on'),
+     path('off/',off,name='off'),
     path('test-file/', test_file_access, name='test_file_access'),
     path('getfirstline/',getfirstline,name='getfirstline'),
     path('myaccount/',myaccount,name='myaccount'),

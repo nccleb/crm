@@ -20,7 +20,7 @@
 <body onload="size242()">
     <div class="jumbotron">
         <p style="text-align:center;font-size:25px;" id="page-title">Agent Details</p>
-
+        
         {% if reload_needed %}
             <button style="color:blue" type="button" class="whatsappbutton" onclick="refresh()">
                 <h4 style="color:Tomato;">Please Reload!</h4>
@@ -40,6 +40,7 @@
                                 <th>Connect</th>
                                 <th>Wait Time</th>
                                 <th>Talk Time</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,7 @@
                                     <td>{{ agent.connect }}</td>
                                     <td>{{ agent.wait_time }}</td>
                                     <td>{{ agent.talk_time }}</td>
+                                    
                                 </tr>
                             {% empty %}
                                 <tr>

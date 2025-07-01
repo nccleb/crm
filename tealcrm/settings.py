@@ -175,3 +175,32 @@ MEDIA_URL = 'media/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# Call Alert Settings
+CALL_WAIT_WARNING_SECONDS = 15    # Send warning after 30 seconds
+CALL_WAIT_CRITICAL_SECONDS = 30    # Send critical alert after 60 seconds  
+CALL_UNANSWERED_SECONDS = 20      # Consider call unanswered after 90 seconds
+
+# Email settings for alerts
+
+CALL_ALERT_RECIPIENTS = [
+    'nccleb@gmail.com',
+   
+]
+
+
+
+# Email backend configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # or your SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'nccleb@gmail.com'
+EMAIL_HOST_PASSWORD = 'lxxb thoe vbho hbxk'
+DEFAULT_FROM_EMAIL = 'UCM6202 Alert System <alerts@yourcompany.com>'
+
+# Optional: Base URL for dashboard links in emails
+BASE_URL = 'https://nccleb.com'

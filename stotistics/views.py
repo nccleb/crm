@@ -4,6 +4,10 @@ from django.shortcuts import render
 import json
 import hashlib
 import requests
+import urllib3
+import ssl
+from requests.adapters import HTTPAdapter
+from urllib3.util.ssl_ import create_urllib3_context
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -12,6 +16,25 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
 from .forms import StatisticsForm
+
+# Disable SSL warnings
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+class LegacyHTTPSAdapter(HTTPAdapter):
+    """HTTPS Adapter that works with legacy SSL servers"""
+    def init_poolmanager(self, *args, **kwargs):
+        context = create_urllib3_context()
+        context.set_ciphers('DEFAULT@SECLEVEL=1')
+        context.check_hostname = False
+        context.verify_mode = ssl.CERT_NONE
+        kwargs['ssl_context'] = context
+        return super().init_poolmanager(*args, **kwargs)
+
+
+
+
+
+
 
 class StatisticsFormView(View):
     """View for displaying the statistics form (equivalent to test462.php)"""
@@ -49,7 +72,7 @@ class StatisticsResultView(View):
         
         if not form.is_valid():
             messages.error(request, 'Missing Entry!')
-            return redirect('statistics_form')
+            return redirect('stotisticss:statistics_form')
         
         start_date = form.cleaned_data['start_date']
         end_date = form.cleaned_data['end_date']
@@ -60,7 +83,7 @@ class StatisticsResultView(View):
             
             if api_data is None:
                 messages.error(request, 'Failed to retrieve data from API')
-                return redirect('statistics_form')
+                return redirect('stotisticss:statistics_form')
             
             # Get URL parameters from session
             page = request.session.get('os', request.GET.get('page', ''))
@@ -75,14 +98,22 @@ class StatisticsResultView(View):
                 'page1': page1,
             }
             
-            return render(request, 'statistics_results.html', context)
+            return render(request, 'stotistics/statistics_results.html', context)
             
         except Exception as e:
             messages.error(request, f'Error processing request: {str(e)}')
-            return redirect('statistics_form')
+            return redirect('stotisticss:statistics_form')
     
     def get_api_data(self, start_date, end_date):
         """Handle API authentication and data retrieval"""
+
+         # Create session with legacy SSL support
+        session = requests.Session()
+        session.mount('https://', LegacyHTTPSAdapter())
+
+
+
+
         try:
             # Step 1: Get challenge
             challenge_data = {
@@ -97,9 +128,11 @@ class StatisticsResultView(View):
                 "Content-Type": "application/json",
             }
             
+            # Define the API URL
+            api_url = 'https://192.168.20.216:8089/api'
             # Make challenge request
-            response = requests.post(
-                'https://192.168.20.216:8089/api',
+            response = session.post(  # Changed from requests.post to session.post
+                api_url,
                 json=challenge_data,
                 headers=headers,
                 verify=False,
@@ -125,13 +158,14 @@ class StatisticsResultView(View):
                 }
             }
             
-            response = requests.post(
-                'https://192.168.20.216:8089/api',
+            response = session.post(  # Changed from requests.post to session.post
+                api_url,
                 json=login_data,
                 headers=headers,
                 verify=False,
                 timeout=30
             )
+            
             
             if response.status_code != 200:
                 return None
@@ -147,13 +181,14 @@ class StatisticsResultView(View):
                 }
             }
             
-            response = requests.post(
-                'https://192.168.20.216:8089/api',
+            response = session.post(  # Changed from requests.post to session.post
+                api_url,
                 json=channels_data,
                 headers=headers,
                 verify=False,
                 timeout=30
             )
+            
             
             if response.status_code == 200:
                 channels_response = response.json()
@@ -173,13 +208,14 @@ class StatisticsResultView(View):
                 }
             }
             
-            response = requests.post(
-                'https://192.168.20.216:8089/api',
+            response = session.post(  # Changed from requests.post to session.post
+                api_url,
                 json=queue_data,
                 headers=headers,
                 verify=False,
                 timeout=30
             )
+            
             
             if response.status_code != 200:
                 return None
