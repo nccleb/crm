@@ -182,7 +182,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Call Alert Settings
 CALL_WAIT_WARNING_SECONDS = 15    # Send warning after 30 seconds
 CALL_WAIT_CRITICAL_SECONDS = 30    # Send critical alert after 60 seconds  
-CALL_UNANSWERED_SECONDS = 20      # Consider call unanswered after 90 seconds
+CALL_UNANSWERED_SECONDS = 5      # Consider call unanswered after 90 seconds
 
 # Email settings for alerts
 

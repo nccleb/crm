@@ -114,11 +114,12 @@ let monitoringActive = false;
 let monitorInterval = null;
 
 function startQueueMonitoring() {
+    //alert('Queue monitoring started.');
     if (monitoringActive) return;
     
     monitoringActive = true;
     console.log('✅ Queue monitoring started');
-    
+    alert('Queue monitoring started.');
     // Run initial check
     checkQueue();
     
@@ -133,6 +134,7 @@ function stopQueueMonitoring() {
         monitorInterval = null;
     }
     console.log('⏹️ Queue monitoring stopped');
+    alert('Queue monitoring has been stopped.');
 }
 
 async function checkQueue() {
@@ -166,4 +168,4 @@ async function checkQueue() {
 }
 
 // Start monitoring automatically
-startQueueMonitoring();
+//startQueueMonitoring();

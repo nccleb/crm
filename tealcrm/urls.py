@@ -5,7 +5,7 @@ from django.contrib.auth import views
 from django.urls import include, path
 from core.views import UserLogoutView,  index, getfirstline, test_file_access,on,off
 from dashboard.views import dashboard
-from queuestat.views import test_api
+#from queuestat.views import test_api
 
 #from queuestat.views import queue_stat, queue_stat_detail
 from lead.views import leads_list,add_lead
@@ -40,7 +40,7 @@ urlpatterns = [
     path('dashboard/teams/', include('team.urls')),
     path('dashboard/leads/', include('lead.urls')),
     path('admin/', admin.site.urls),
-    path('test-api/', test_api, name='test_api'),
+    #path('test-api/', test_api, name='test_api'),
     path('add_lead/',add_lead, name='add_lead' ),
     path('stotistics/', include('stotistics.urls', namespace='stotisticss')),
      

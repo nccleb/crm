@@ -135,28 +135,28 @@ class CallAlertManager:
                     logger.info(f"UNANSWERED CALL ALERT: {caller_num} waiting {wait_seconds}s (most recent of {len(calls)} calls)")
             
             # Check for long wait times (still waiting) - only for the most recent call
-            elif connect_status == 'no' and wait_seconds >= self.alert_thresholds['wait_time_critical']:
-                alert_key = f"{caller_num}_{start_time_str}_longwait"
+            # elif connect_status == 'no' and wait_seconds >= self.alert_thresholds['wait_time_critical']:
+            #     alert_key = f"{caller_num}_{start_time_str}_longwait"
                 
-                if self.should_send_alert(alert_key):
-                    alert_data = {
-                        'type': 'LONG_WAIT_TIME',
-                        'severity': 'HIGH',
-                        'queue_name': queue_name,
-                        'caller_number': caller_num,
-                        'wait_time_seconds': wait_seconds,
-                        'wait_time_display': wait_time_str,
-                        'start_time': start_time_str,
-                        'agent': agent_data.get('agent', 'None'),
-                        'queuechairman': agent_data.get('queuechairman', 'Unknown'),
-                        'call_count': len(calls),
-                        'is_most_recent': True
-                    }
-                    alerts_needed.append(alert_data)
-                    self.mark_alert_sent(alert_key)
+            #     if self.should_send_alert(alert_key):
+            #         alert_data = {
+            #             'type': 'LONG_WAIT_TIME',
+            #             'severity': 'HIGH',
+            #             'queue_name': queue_name,
+            #             'caller_number': caller_num,
+            #             'wait_time_seconds': wait_seconds,
+            #             'wait_time_display': wait_time_str,
+            #             'start_time': start_time_str,
+            #             'agent': agent_data.get('agent', 'None'),
+            #             'queuechairman': agent_data.get('queuechairman', 'Unknown'),
+            #             'call_count': len(calls),
+            #             'is_most_recent': True
+            #         }
+            #         alerts_needed.append(alert_data)
+            #         self.mark_alert_sent(alert_key)
                     
-                    # Log for debugging
-                    logger.info(f"LONG WAIT ALERT: {caller_num} waiting {wait_seconds}s (most recent of {len(calls)} calls)")
+            #         # Log for debugging
+            #         logger.info(f"LONG WAIT ALERT: {caller_num} waiting {wait_seconds}s (most recent of {len(calls)} calls)")
         
         return alerts_needed
 
@@ -183,70 +183,30 @@ class CallAlertManager:
         except (ValueError, IndexError):
             return 0
     
-    def should_send_alert(self, alert_key, alert_type='generic'):
-        """IMPROVED: Check if we should send alert with better logic"""
+    def should_send_alert(self, alert_key):
+        """Check if we should send alert (avoid spam)"""
         current_time = datetime.now()
+        last_sent = self.sent_alerts.get(alert_key)
         
-        # Create a composite key that includes alert type
-        composite_key = f"{alert_type}_{alert_key}"
-        
-        last_sent_info = self.sent_alerts.get(composite_key)
-        
-        if not last_sent_info:
+        if not last_sent:
             return True
         
-        last_sent_time = last_sent_info.get('timestamp')
-        send_count = last_sent_info.get('count', 0)
-        
-        if not last_sent_time:
-            return True
-        
-        time_diff = (current_time - last_sent_time).total_seconds()
-        
-        # Progressive backoff - increase wait time based on how many times we've sent this alert
-        if send_count == 0:
-            min_wait_seconds = 300  # 5 minutes for first alert
-        elif send_count == 1:
-            min_wait_seconds = 900  # 15 minutes for second alert
-        elif send_count == 2:
-            min_wait_seconds = 1800  # 30 minutes for third alert
-        else:
-            min_wait_seconds = 3600  # 1 hour for subsequent alerts
-        
-        # Don't send if within the minimum wait period
-        if time_diff < min_wait_seconds:
-            logger.info(f"Alert suppressed: {composite_key} (sent {send_count} times, waiting {min_wait_seconds}s, only {time_diff}s passed)")
+        # Don't send same alert within 12 hours
+        if (current_time - last_sent).total_seconds() < 43200:
             return False
         
         return True
     
-    def mark_alert_sent(self, alert_key, alert_type='generic'):
-        """IMPROVED: Mark alert as sent with better tracking"""
+    def mark_alert_sent(self, alert_key):
+        """Mark alert as sent"""
+        self.sent_alerts[alert_key] = datetime.now()
+        
+        # Clean old entries (older than 1 hour)
         current_time = datetime.now()
-        composite_key = f"{alert_type}_{alert_key}"
-        
-        # Update or create alert record
-        if composite_key in self.sent_alerts:
-            self.sent_alerts[composite_key]['count'] += 1
-            self.sent_alerts[composite_key]['timestamp'] = current_time
-            self.sent_alerts[composite_key]['last_updated'] = current_time
-        else:
-            self.sent_alerts[composite_key] = {
-                'count': 1,
-                'timestamp': current_time,
-                'first_sent': current_time,
-                'last_updated': current_time,
-                'alert_type': alert_type
-            }
-        
-        # Clean old entries (older than 4 hours)
-        cleanup_threshold = current_time - timedelta(hours=4)
         self.sent_alerts = {
             k: v for k, v in self.sent_alerts.items()
-            if v.get('timestamp', current_time) > cleanup_threshold
+            if (current_time - v).total_seconds() < 1800
         }
-        
-        logger.info(f"Alert marked as sent: {composite_key} (count: {self.sent_alerts[composite_key]['count']})")
     
     def send_alert_email(self, alert_data):
         """Send email alert"""
@@ -318,129 +278,6 @@ Action Required:
 
 # Global alert manager instance
 alert_manager = CallAlertManager()
-
-def test_api(request):
-    """Django view to test API connectivity"""
-    api_url = 'https://192.168.20.216:8089/api'
-    output = []
-    
-    output.append("=== API Authentication Test ===\n")
-    
-    # Create session with legacy SSL support
-    session = requests.Session()
-    session.mount('https://', LegacyHTTPSAdapter())
-    
-    # Test basic connectivity
-    output.append("Step 1: Testing basic connectivity...")
-    try:
-        response = session.get(api_url, verify=False, timeout=10)
-        output.append(f"✓ Basic connectivity test: Status {response.status_code}")
-    except Exception as e:
-        output.append(f"✗ Cannot reach API: {e}")
-        return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-    
-    # Test authentication flow
-    output.append("\nStep 2: Testing challenge request...")
-    try:
-        # Step 1: Get challenge
-        challenge_data = {
-            "request": {
-                "action": "challenge",
-                "user": "cdrapi"
-            }
-        }
-        
-        headers = {
-            "Connection": "close",
-            "Content-Type": "application/json"
-        }
-        
-        response = session.post(
-            api_url,
-            json=challenge_data,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        output.append(f"Challenge response status: {response.status_code}")
-        
-        if response.status_code != 200:
-            output.append(f"✗ Challenge failed with status {response.status_code}")
-            output.append(f"Response body: {response.text}")
-            return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-            
-        try:
-            challenge_response = response.json()
-            output.append(f"✓ Challenge response JSON parsed successfully")
-        except json.JSONDecodeError:
-            output.append(f"✗ Invalid JSON in challenge response: {response.text}")
-            return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-            
-        challenge = challenge_response.get('response', {}).get('challenge')
-        
-        if not challenge:
-            output.append(f"✗ No challenge found in response")
-            output.append(f"Full response: {challenge_response}")
-            return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-        
-        output.append(f"✓ Challenge received: {challenge}")
-        
-        # Step 2: Generate token and login
-        output.append("\nStep 3: Testing login with token...")
-        password = "cdrapi123"
-        token = hashlib.md5((challenge + password).encode()).hexdigest()
-        output.append(f"Generated token: {token}")
-        
-        login_data = {
-            "request": {
-                "action": "login",
-                "token": token,
-                "user": "cdrapi"
-            }
-        }
-        
-        response = session.post(
-            api_url,
-            json=login_data,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        output.append(f"Login response status: {response.status_code}")
-        
-        if response.status_code != 200:
-            output.append(f"✗ Login failed with status {response.status_code}")
-            output.append(f"Response body: {response.text}")
-            return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-            
-        try:
-            login_response = response.json()
-            output.append(f"✓ Login response JSON parsed successfully")
-        except json.JSONDecodeError:
-            output.append(f"✗ Invalid JSON in login response: {response.text}")
-            return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-            
-        cookie = login_response.get('response', {}).get('cookie')
-        
-        if cookie:
-            output.append(f"✅ SUCCESS! Cookie received: {cookie}")
-            output.append(f"\nFull login response: {login_response}")
-        else:
-            output.append(f"✗ No cookie in login response")
-            output.append(f"Full response: {login_response}")
-            
-    except requests.exceptions.RequestException as e:
-        output.append(f"✗ Request error during authentication: {e}")
-    except Exception as e:
-        output.append(f"✗ Unexpected error during authentication: {e}")
-    
-    output.append("\n=== Test Complete ===")
-    return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
-
-
-
 
 
 
@@ -688,119 +525,119 @@ class AgentDetailsView(View):
         return filtered_results
 
 
-class RealTimeMonitorView(View):
-    """Real-time monitoring endpoint for continuous queue checking"""
+# class RealTimeMonitorView(View):
+#     """Real-time monitoring endpoint for continuous queue checking"""
     
-    def get(self, request):
-        """Return current queue status and alerts"""
-        try:
-            # Get current time parameters for real-time check
-            now = datetime.now()
+#     def get(self, request):
+#         """Return current queue status and alerts"""
+#         try:
+#             # Get current time parameters for real-time check
+#             now = datetime.now()
             
-            # FIXED: Proper time formatting for API
-            # Check calls from beginning of today to now
-            start_time = now.strftime('%Y-%m-%d ')
-            end_time = now.strftime('%Y-%m-%d ')
+#             # FIXED: Proper time formatting for API
+#             # Check calls from beginning of today to now
+#             start_time = now.strftime('%Y-%m-%d ')
+#             end_time = now.strftime('%Y-%m-%d ')
             
-            logger.info(f"Real-time monitor: checking from {start_time} to {end_time}")
+#             logger.info(f"Real-time monitor: checking from {start_time} to {end_time}")
             
-            # Get API cookie
-            agent_view = AgentDetailsView()
-            cookie = agent_view.get_api_cookie()
+#             # Get API cookie
+#             agent_view = AgentDetailsView()
+#             cookie = agent_view.get_api_cookie()
             
-            if not cookie:
-                logger.error("Failed to get API cookie for real-time monitoring")
-                return JsonResponse({
-                    'status': 'error', 
-                    'message': 'API authentication failed',
-                    'timestamp': now.isoformat()
-                })
+#             if not cookie:
+#                 logger.error("Failed to get API cookie for real-time monitoring")
+#                 return JsonResponse({
+#                     'status': 'error', 
+#                     'message': 'API authentication failed',
+#                     'timestamp': now.isoformat()
+#                 })
             
-            # Get current queue data for all queues and agents
-            que = '6500'  # Define queue as 'all' for real-time monitoring
-            agent = 'all'  # Define agent as 'all' for real-time monitoring
-            queue_data = agent_view.get_queue_data(cookie, start_time, end_time, que, agent)
+#             # Get current queue data for all queues and agents
+#             que = '6500'  # Define queue as 'all' for real-time monitoring
+#             agent = 'all'  # Define agent as 'all' for real-time monitoring
+#             queue_data = agent_view.get_queue_data(cookie, start_time, end_time, que, agent)
             
-            if queue_data is None:
-                logger.warning("No queue data returned from API")
-                return JsonResponse({
-                    'status': 'no_data', 
-                    'alerts': [], 
-                    'timestamp': now.isoformat(),
-                    'message': 'Failed to retrieve queue data from API',
-                    'start_time': start_time,
-                    'end_time': end_time,
-                    'debug_info': 'API returned None - check API connection and authentication'
-                })
+#             if queue_data is None:
+#                 logger.warning("No queue data returned from API")
+#                 return JsonResponse({
+#                     'status': 'no_data', 
+#                     'alerts': [], 
+#                     'timestamp': now.isoformat(),
+#                     'message': 'Failed to retrieve queue data from API',
+#                     'start_time': start_time,
+#                     'end_time': end_time,
+#                     'debug_info': 'API returned None - check API connection and authentication'
+#                 })
             
-            if not queue_data:  # Empty list
-                logger.info("No active calls found")
-                return JsonResponse({
-                    'status': 'no_active_calls', 
-                    'alerts': [], 
-                    'timestamp': now.isoformat(),
-                    'message': 'No active calls found in the specified time range',
-                    'start_time': start_time,
-                    'end_time': end_time,
-                    'total_records': 0
-                })
+#             if not queue_data:  # Empty list
+#                 logger.info("No active calls found")
+#                 return JsonResponse({
+#                     'status': 'no_active_calls', 
+#                     'alerts': [], 
+#                     'timestamp': now.isoformat(),
+#                     'message': 'No active calls found in the specified time range',
+#                     'start_time': start_time,
+#                     'end_time': end_time,
+#                     'total_records': 0
+#                 })
             
-            logger.info(f"Processing {len(queue_data)} queue records for alerts")
+#             logger.info(f"Processing {len(queue_data)} queue records for alerts")
             
-            # Debug: Log first few records to understand data structure
-            if len(queue_data) > 0:
-                logger.info(f"Sample queue record: {json.dumps(queue_data[0], indent=2)}")
+#             # Debug: Log first few records to understand data structure
+#             if len(queue_data) > 0:
+#                 logger.info(f"Sample queue record: {json.dumps(queue_data[0], indent=2)}")
             
-            # Check for alerts
-            alerts = alert_manager.check_queue_for_alerts(queue_data, "Real-time Monitor")
+#             # Check for alerts
+#             alerts = alert_manager.check_queue_for_alerts(queue_data, "Real-time Monitor")
             
-            # Send email alerts
-            for alert in alerts:
-                try:
-                    alert_manager.send_alert_email(alert)
-                    logger.info(f"Alert sent: {alert['type']} for {alert['caller_number']}")
-                except Exception as email_error:
-                    logger.error(f"Failed to send alert email: {email_error}")
+#             # Send email alerts
+#             for alert in alerts:
+#                 try:
+#                     alert_manager.send_alert_email(alert)
+#                     logger.info(f"Alert sent: {alert['type']} for {alert['caller_number']}")
+#                 except Exception as email_error:
+#                     logger.error(f"Failed to send alert email: {email_error}")
             
-            # Count waiting calls (connect = 'no')
-            waiting_calls = 0
-            connected_calls = 0
+#             # Count waiting calls (connect = 'no')
+#             waiting_calls = 0
+#             connected_calls = 0
             
-            for item in queue_data:
-                agent_data = item.get('agent', {})
-                if agent_data.get('agent') != 'NONE':
-                    if agent_data.get('connect') == 'no':
-                        waiting_calls += 1
-                    elif agent_data.get('connect') == 'yes':
-                        connected_calls += 1
+#             for item in queue_data:
+#                 agent_data = item.get('agent', {})
+#                 if agent_data.get('agent') != 'NONE':
+#                     if agent_data.get('connect') == 'no':
+#                         waiting_calls += 1
+#                     elif agent_data.get('connect') == 'yes':
+#                         connected_calls += 1
 
-            # Return detailed status
-            return JsonResponse({
-                'status': 'success',
-                'timestamp': now.isoformat(),
-                'alerts_count': len(alerts),
-                'alerts': alerts,
-                'total_calls': len(queue_data),
-                'waiting_calls': waiting_calls,
-                'connected_calls': connected_calls,
-                'monitoring_period': f"{start_time} to {end_time}",
-                'debug_info': {
-                    'api_cookie_length': len(cookie) if cookie else 0,
-                    'first_record_keys': list(queue_data[0].keys()) if queue_data else [],
-                    'sample_agent_data': queue_data[0].get('agent', {}) if queue_data else {}
-                }
-            })
+#             # Return detailed status
+#             return JsonResponse({
+#                 'status': 'success',
+#                 'timestamp': now.isoformat(),
+#                 'alerts_count': len(alerts),
+#                 'alerts': alerts,
+#                 'total_calls': len(queue_data),
+#                 'waiting_calls': waiting_calls,
+#                 'connected_calls': connected_calls,
+#                 'monitoring_period': f"{start_time} to {end_time}",
+#                 'debug_info': {
+#                     'api_cookie_length': len(cookie) if cookie else 0,
+#                     'first_record_keys': list(queue_data[0].keys()) if queue_data else [],
+#                     'sample_agent_data': queue_data[0].get('agent', {}) if queue_data else {}
+#                 }
+#             })
 
-        except Exception as e:
-            logger.error(f"Real-time monitoring error: {str(e)}")
-            import traceback
-            logger.error(f"Traceback: {traceback.format_exc()}")
-            return JsonResponse({
-                'status': 'error', 
-                'message': str(e),
-                'timestamp': datetime.now().isoformat(),
-                'traceback': traceback.format_exc()
-            })
+#         except Exception as e:
+#             logger.error(f"Real-time monitoring error: {str(e)}")
+#             import traceback
+#             logger.error(f"Traceback: {traceback.format_exc()}")
+#             return JsonResponse({
+#                 'status': 'error', 
+#                 'message': str(e),
+#                 'timestamp': datetime.now().isoformat(),
+#                 'traceback': traceback.format_exc()
+#             })
 
 
 
@@ -925,53 +762,6 @@ def test_realtime_data(request):
 
 
 
-def make_raw_queue_api_call(cookie, start_time, end_time, queue, agent):
-    """Make raw API call and return the full response without processing"""
-    api_url = 'https://192.168.20.216:8089/api'
-    
-    # Create session with legacy SSL support
-    session = requests.Session()
-    session.mount('https://', LegacyHTTPSAdapter())
-    
-    try:
-        queue_request = {
-            "request": {
-                "action": "queueapi",
-                "endTime": end_time,
-                "startTime": start_time,
-                "queue": queue,
-                "agent": agent,
-                "format": "json",
-                "statisticsType": "calldetail",
-                "cookie": cookie
-            }
-        }
-        
-        headers = {
-            "Connection": "close",
-            "Content-Type": "application/json"
-        }
-        
-        response = session.post(
-            api_url,
-            json=queue_request,
-            headers=headers,
-            verify=False,
-            timeout=30
-        )
-        
-        if response.status_code != 200:
-            return {"error": f"HTTP {response.status_code}", "body": response.text}
-        
-        try:
-            return response.json()
-        except json.JSONDecodeError:
-            return {"error": "Invalid JSON", "body": response.text}
-            
-    except Exception as e:
-        return {"error": str(e)}
-
-
 
 
 
@@ -1006,123 +796,123 @@ DEFAULT_FROM_EMAIL = 'UCM6202 Alert System <alerts@yourcompany.com>'
 BASE_URL = 'https://yourdomain.com'
 """
 
-import asyncio
-from django.http import HttpResponse
-from asgiref.sync import sync_to_async
+# import asyncio
+# from django.http import HttpResponse
+# from asgiref.sync import sync_to_async
 
-async def start_continuous_monitoring(request):
-    """Start continuous monitoring (runs in background)"""
+# async def start_continuous_monitoring(request):
+#     """Start continuous monitoring (runs in background)"""
     
-    async def monitor_loop():
-        while True:
-            try:
-                # Run the monitoring check
-                await sync_to_async(check_queue_sync)()
-                await asyncio.sleep(30)  # Wait 30 seconds
-            except Exception as e:
-                logger.error(f"Async monitor error: {e}")
-                await asyncio.sleep(30)
+#     async def monitor_loop():
+#         while True:
+#             try:
+#                 # Run the monitoring check
+#                 await sync_to_async(check_queue_sync)()
+#                 await asyncio.sleep(30)  # Wait 30 seconds
+#             except Exception as e:
+#                 logger.error(f"Async monitor error: {e}")
+#                 await asyncio.sleep(30)
     
-    # Start the monitoring task
-    asyncio.create_task(monitor_loop())
+#     # Start the monitoring task
+#     asyncio.create_task(monitor_loop())
     
-    return HttpResponse("✅ Continuous monitoring started! Check logs for activity.")
+#     return HttpResponse("✅ Continuous monitoring started! Check logs for activity.")
 
-def check_queue_sync():
-    try:
-        now = datetime.now()
-        start_time = now.strftime('%Y-%m-%d' )
-        end_time = now.strftime('%Y-%m-%d' )
+# def check_queue_sync():
+#     try:
+#         now = datetime.now()
+#         start_time = now.strftime('%Y-%m-%d' )
+#         end_time = now.strftime('%Y-%m-%d' )
         
-        # Get API cookie
-        agent_view = AgentDetailsView()
-        cookie = agent_view.get_api_cookie()
+#         # Get API cookie
+#         agent_view = AgentDetailsView()
+#         cookie = agent_view.get_api_cookie()
         
-        if not cookie:
-            return HttpResponse("❌ Failed to get API cookie")
+#         if not cookie:
+#             return HttpResponse("❌ Failed to get API cookie")
         
-        # Get queue data
-        queue_data = agent_view.get_queue_data(cookie, start_time, end_time, '', '')
+#         # Get queue data
+#         queue_data = agent_view.get_queue_data(cookie, start_time, end_time, '', '')
         
-        output = []
-        output.append("=== Real-time Data Test ===")
-        output.append(f"Time range: {start_time} to {end_time}")
-        output.append(f"API cookie: {cookie[:20]}...")
-        output.append(f"Queue data type: {type(queue_data)}")
-        output.append(f"Queue data length: {len(queue_data) if queue_data else 'None'}")
-        
-        
+#         output = []
+#         output.append("=== Real-time Data Test ===")
+#         output.append(f"Time range: {start_time} to {end_time}")
+#         output.append(f"API cookie: {cookie[:20]}...")
+#         output.append(f"Queue data type: {type(queue_data)}")
+#         output.append(f"Queue data length: {len(queue_data) if queue_data else 'None'}")
         
         
         
-        if queue_data:
-            output.append("\n--- Sample Records ---")
-            for i, record in enumerate(queue_data[:3]):  # Show first 3 records
-                output.append(f"\nRecord {i+1}:")
-                output.append(json.dumps(record, indent=2))
+        
+        
+#         if queue_data:
+#             output.append("\n--- Sample Records ---")
+#             for i, record in enumerate(queue_data[:3]):  # Show first 3 records
+#                 output.append(f"\nRecord {i+1}:")
+#                 output.append(json.dumps(record, indent=2))
                 
-                # Check for alert conditions
-                agent_data = record.get('agent', {})
-                if agent_data.get('agent') != 'NONE':
-                    caller_num = agent_data.get('callernum', 'Unknown')
-                    connect_status = agent_data.get('connect', 'unknown')
-                    wait_time = agent_data.get('wait_time', '0')
+#                 # Check for alert conditions
+#                 agent_data = record.get('agent', {})
+#                 if agent_data.get('agent') != 'NONE':
+#                     caller_num = agent_data.get('callernum', 'Unknown')
+#                     connect_status = agent_data.get('connect', 'unknown')
+#                     wait_time = agent_data.get('wait_time', '0')
                     
-                    output.append(f"  -> Caller: {caller_num}")
-                    output.append(f"  -> Connected: {connect_status}")
-                    output.append(f"  -> Wait time: {wait_time}")
+#                     output.append(f"  -> Caller: {caller_num}")
+#                     output.append(f"  -> Connected: {connect_status}")
+#                     output.append(f"  -> Wait time: {wait_time}")
                     
-                    # Parse wait time
-                    wait_seconds = alert_manager.parse_wait_time(wait_time)
-                    output.append(f"  -> Wait seconds: {wait_seconds}")
+#                     # Parse wait time
+#                     wait_seconds = alert_manager.parse_wait_time(wait_time)
+#                     output.append(f"  -> Wait seconds: {wait_seconds}")
                     
-                    if connect_status == 'no' and wait_seconds > 30:
-                        output.append(f"  -> ⚠️ Would trigger alert!")
-                        # Check for alerts
-                        alerts = alert_manager.check_queue_for_alerts(queue_data, "Real-time Monitor")
+#                     if connect_status == 'no' and wait_seconds > 30:
+#                         output.append(f"  -> ⚠️ Would trigger alert!")
+#                         # Check for alerts
+#                         alerts = alert_manager.check_queue_for_alerts(queue_data, "Real-time Monitor")
             
-            # Send email alerts
-            for alert in alerts:
-                try:
-                    alert_manager.send_alert_email(alert)
-                    logger.info(f"Alert sent: {alert['type']} for {alert['caller_number']}")
-                except Exception as email_error:
-                    logger.error(f"Failed to send alert email: {email_error}")
+#             # Send email alerts
+#             for alert in alerts:
+#                 try:
+#                     alert_manager.send_alert_email(alert)
+#                     logger.info(f"Alert sent: {alert['type']} for {alert['caller_number']}")
+#                 except Exception as email_error:
+#                     logger.error(f"Failed to send alert email: {email_error}")
             
-            # Count waiting calls (connect = 'no')
-            waiting_calls = 0
-            connected_calls = 0
+#             # Count waiting calls (connect = 'no')
+#             waiting_calls = 0
+#             connected_calls = 0
             
-            for item in queue_data:
-                agent_data = item.get('agent', {})
-                if agent_data.get('agent') != 'NONE':
-                    if agent_data.get('connect') == 'no':
-                        waiting_calls += 1
-                    elif agent_data.get('connect') == 'yes':
-                        connected_calls += 1
+#             for item in queue_data:
+#                 agent_data = item.get('agent', {})
+#                 if agent_data.get('agent') != 'NONE':
+#                     if agent_data.get('connect') == 'no':
+#                         waiting_calls += 1
+#                     elif agent_data.get('connect') == 'yes':
+#                         connected_calls += 1
             
-            # Return detailed status
-            return JsonResponse({
-                'status': 'success',
-                'timestamp': now.isoformat(),
-                'alerts_count': len(alerts),
-                'alerts': alerts,
-                'total_calls': len(queue_data),
-                'waiting_calls': waiting_calls,
-                'connected_calls': connected_calls,
-                'monitoring_period': f"{start_time} to {end_time}",
-                'debug_info': {
-                    'api_cookie_length': len(cookie) if cookie else 0,
-                    'first_record_keys': list(queue_data[0].keys()) if queue_data else [],
-                    'sample_agent_data': queue_data[0].get('agent', {}) if queue_data else {}
-                }
-            })
+#             # Return detailed status
+#             return JsonResponse({
+#                 'status': 'success',
+#                 'timestamp': now.isoformat(),
+#                 'alerts_count': len(alerts),
+#                 'alerts': alerts,
+#                 'total_calls': len(queue_data),
+#                 'waiting_calls': waiting_calls,
+#                 'connected_calls': connected_calls,
+#                 'monitoring_period': f"{start_time} to {end_time}",
+#                 'debug_info': {
+#                     'api_cookie_length': len(cookie) if cookie else 0,
+#                     'first_record_keys': list(queue_data[0].keys()) if queue_data else [],
+#                     'sample_agent_data': queue_data[0].get('agent', {}) if queue_data else {}
+#                 }
+#             })
 
-        else:
-            output.append("\n❌ No queue data returned")
+#         else:
+#             output.append("\n❌ No queue data returned")
         
-        return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
+#         return HttpResponse("<pre>" + "\n".join(output) + "</pre>")
         
-    except Exception as e:
-        import traceback
-        return HttpResponse(f"❌ Error: {str(e)}\n\nTraceback:\n{traceback.format_exc()}")
+#     except Exception as e:
+#         import traceback
+#         return HttpResponse(f"❌ Error: {str(e)}\n\nTraceback:\n{traceback.format_exc()}")
