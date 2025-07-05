@@ -1231,3 +1231,724 @@ Message: Authentication failed
 2025-07-03 09:28:13,203 - INFO - Connecting to AMI at 192.168.20.216:7777
 2025-07-03 09:28:13,207 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
 2025-07-03 09:28:13,213 - INFO - AMI authentication successful
+2025-07-03 09:31:27,034 - INFO - Starting Caller ID Monitor...
+2025-07-03 09:31:27,034 - INFO - Testing AMI connection...
+2025-07-03 09:31:27,035 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 09:31:27,040 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 09:31:27,044 - INFO - AMI authentication successful
+2025-07-03 09:31:27,045 - INFO - AMI connection test successful
+2025-07-03 09:31:27,045 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 09:31:27,055 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 09:31:27,061 - INFO - AMI authentication successful
+2025-07-03 09:36:27,121 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 09:40:52,625 - INFO - File updated: 6001 - 
+2025-07-03 09:41:02,691 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 09:41:02,692 - INFO - Display cleared
+2025-07-03 09:41:13,235 - INFO - File updated: 6001 - q1
+2025-07-03 09:41:13,255 - INFO - File updated: 6001 - q1
+2025-07-03 09:41:13,256 - INFO - Queue call: 6001 joined queue
+2025-07-03 09:41:26,647 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 09:41:26,648 - INFO - Display cleared
+2025-07-03 09:41:27,206 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 09:41:35,165 - INFO - File updated: 6002 - 
+2025-07-03 09:41:45,228 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 09:41:45,230 - INFO - Display cleared
+2025-07-03 09:41:56,289 - INFO - File updated: 6002 - q1
+2025-07-03 09:41:56,298 - INFO - File updated: 6002 - q1
+2025-07-03 09:41:56,298 - INFO - Queue call: 6002 joined queue
+2025-07-03 09:42:12,864 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 09:42:12,866 - INFO - Display cleared
+2025-07-03 09:46:27,240 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 09:51:27,266 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 09:56:27,317 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:01:27,352 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:06:27,380 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:10:47,406 - INFO - File updated: 6001 - 
+2025-07-03 10:10:57,465 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 10:10:57,467 - INFO - Display cleared
+2025-07-03 10:11:16,008 - INFO - File updated: 6001 - q1
+2025-07-03 10:11:16,034 - INFO - File updated: 6001 - q1
+2025-07-03 10:11:16,034 - INFO - Queue call: 6001 joined queue
+2025-07-03 10:11:33,640 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 10:11:33,641 - INFO - Display cleared
+2025-07-03 10:11:37,404 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:12:31,037 - INFO - File updated: 6001 - 
+2025-07-03 10:12:41,485 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 10:12:41,487 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 10:12:46,490 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 10:12:46,599 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 10:12:46,603 - INFO - AMI authentication successful
+2025-07-03 10:12:46,604 - INFO - Reconnection successful
+2025-07-03 10:12:54,545 - INFO - File updated: 6001 - q1
+2025-07-03 10:12:54,572 - INFO - File updated: 6001 - q1
+2025-07-03 10:12:54,572 - INFO - Queue call: 6001 joined queue
+2025-07-03 10:13:57,437 - INFO - Watchdog: No activity for 62s. Clearing stuck call.
+2025-07-03 10:13:57,437 - INFO - Display cleared
+2025-07-03 10:16:37,462 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:21:37,538 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:26:37,577 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:31:37,599 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:36:37,621 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:41:37,644 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:46:37,668 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:47:40,994 - INFO - File updated: 6002 - 
+2025-07-03 10:47:51,043 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 10:47:51,045 - INFO - Display cleared
+2025-07-03 10:48:01,695 - INFO - File updated: 6002 - q1
+2025-07-03 10:48:01,743 - INFO - File updated: 6002 - q1
+2025-07-03 10:48:01,744 - INFO - Queue call: 6002 joined queue
+2025-07-03 10:48:16,200 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 10:48:16,201 - INFO - Display cleared
+2025-07-03 10:51:37,706 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 10:53:59,103 - INFO - File updated: 6002 - 
+2025-07-03 10:54:09,089 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 10:54:09,089 - INFO - Display cleared
+2025-07-03 10:54:23,974 - INFO - File updated: 6002 - q1
+2025-07-03 10:54:23,979 - INFO - File updated: 6002 - q1
+2025-07-03 10:54:23,979 - INFO - Queue call: 6002 joined queue
+2025-07-03 10:54:35,743 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 10:54:35,745 - INFO - Display cleared
+2025-07-03 10:56:37,745 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:01:37,772 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:06:37,811 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:11:37,849 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:16:37,878 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:21:37,913 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:26:37,952 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:31:37,978 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:36:38,009 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:41:38,038 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:46:38,060 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:51:38,090 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:56:38,116 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 11:57:25,862 - INFO - File updated: 6002 - 
+2025-07-03 11:57:35,922 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 11:57:35,923 - INFO - Display cleared
+2025-07-03 11:57:46,851 - INFO - File updated: 6002 - q1
+2025-07-03 11:57:46,893 - INFO - File updated: 6002 - q1
+2025-07-03 11:57:46,894 - INFO - Queue call: 6002 joined queue
+2025-07-03 11:58:02,522 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 11:58:02,524 - INFO - Display cleared
+2025-07-03 12:01:38,204 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:06:38,232 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:11:38,255 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:16:38,291 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:21:38,318 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:26:38,361 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:27:29,184 - INFO - File updated: 6002 - 
+2025-07-03 12:27:39,248 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 12:27:39,249 - INFO - Display cleared
+2025-07-03 12:27:49,795 - INFO - File updated: 6002 - q1
+2025-07-03 12:27:49,850 - INFO - File updated: 6002 - q1
+2025-07-03 12:27:49,850 - INFO - Queue call: 6002 joined queue
+2025-07-03 12:28:12,042 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 12:28:12,042 - INFO - Display cleared
+2025-07-03 12:31:38,389 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:36:38,418 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:41:38,444 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:46:38,472 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:51:38,497 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 12:56:38,542 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:01:38,568 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:06:38,597 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:11:38,624 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:16:38,651 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:21:38,680 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:26:38,709 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:31:38,736 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:36:38,765 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:41:38,793 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:46:38,822 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:51:38,847 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 13:56:38,877 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:01:38,904 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:06:38,933 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:11:38,960 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:16:38,987 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:21:39,015 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:26:39,042 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:27:04,479 - INFO - File updated: 6001 - 
+2025-07-03 14:27:14,539 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 14:27:14,541 - INFO - Display cleared
+2025-07-03 14:27:19,520 - INFO - File updated: 6002 - 
+2025-07-03 14:27:23,925 - INFO - File updated: 6001 - q1
+2025-07-03 14:27:23,957 - INFO - File updated: 6001 - q1
+2025-07-03 14:27:23,958 - INFO - Queue call: 6001 joined queue
+2025-07-03 14:27:39,067 - INFO - File updated: 6002 - q1
+2025-07-03 14:27:39,089 - INFO - File updated: 6002 - q1
+2025-07-03 14:27:39,089 - INFO - Queue call: 6002 joined queue
+2025-07-03 14:27:46,118 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 14:27:49,795 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 14:27:49,799 - INFO - Display cleared
+2025-07-03 14:29:14,809 - INFO - File updated: 6001 - 
+2025-07-03 14:29:24,755 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 14:29:24,758 - INFO - Display cleared
+2025-07-03 14:29:34,044 - INFO - File updated: 6001 - q1
+2025-07-03 14:29:34,074 - INFO - File updated: 6001 - q1
+2025-07-03 14:29:34,074 - INFO - Queue call: 6001 joined queue
+2025-07-03 14:30:39,068 - INFO - Watchdog: No activity for 64s. Clearing stuck call.
+2025-07-03 14:30:39,070 - INFO - Display cleared
+2025-07-03 14:31:39,076 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:36:39,103 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:41:39,135 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:46:39,158 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:51:39,181 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 14:56:39,207 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:01:39,234 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:06:39,258 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:11:39,284 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:16:39,310 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:21:39,547 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:26:39,566 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:31:39,584 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:36:39,602 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:41:39,631 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:46:39,654 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:47:06,979 - INFO - File updated: 6002 - 
+2025-07-03 15:47:17,122 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 15:47:17,124 - INFO - Display cleared
+2025-07-03 15:47:31,712 - INFO - File updated: 6002 - q1
+2025-07-03 15:47:31,733 - INFO - File updated: 6002 - q1
+2025-07-03 15:47:31,733 - INFO - Queue call: 6002 joined queue
+2025-07-03 15:47:56,164 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 15:47:56,166 - INFO - Display cleared
+2025-07-03 15:50:08,373 - INFO - File updated: 6001 - 
+2025-07-03 15:50:18,441 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 15:50:18,443 - INFO - Display cleared
+2025-07-03 15:50:34,175 - INFO - File updated: 6001 - 
+2025-07-03 15:50:44,218 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 15:50:44,220 - INFO - Display cleared
+2025-07-03 15:50:54,513 - INFO - File updated: 6001 - q1
+2025-07-03 15:50:54,552 - INFO - File updated: 6001 - q1
+2025-07-03 15:50:54,552 - INFO - Queue call: 6001 joined queue
+2025-07-03 15:51:03,070 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 15:51:03,071 - INFO - Display cleared
+2025-07-03 15:51:39,721 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:53:15,357 - INFO - File updated: 6002 - 
+2025-07-03 15:53:25,426 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 15:53:25,428 - INFO - Display cleared
+2025-07-03 15:53:47,274 - INFO - File updated: 6002 - q1
+2025-07-03 15:53:47,278 - INFO - File updated: 6002 - q1
+2025-07-03 15:53:47,279 - INFO - Queue call: 6002 joined queue
+2025-07-03 15:54:00,571 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 15:54:00,573 - INFO - Display cleared
+2025-07-03 15:55:38,085 - INFO - Starting Caller ID Monitor...
+2025-07-03 15:55:38,085 - INFO - Testing AMI connection...
+2025-07-03 15:55:38,086 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 15:55:38,090 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 15:55:38,093 - INFO - AMI authentication successful
+2025-07-03 15:55:38,093 - INFO - AMI connection test successful
+2025-07-03 15:55:38,094 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 15:55:38,097 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 15:55:38,099 - INFO - AMI authentication successful
+2025-07-03 15:56:36,536 - INFO - File updated: 6002 - 
+2025-07-03 15:56:36,537 - INFO - File updated: 6002 - 
+2025-07-03 15:56:46,563 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 15:56:46,565 - INFO - Display cleared
+2025-07-03 15:56:46,565 - INFO - Display cleared
+2025-07-03 15:56:49,749 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 15:56:58,959 - INFO - File updated: 6002 - q1
+2025-07-03 15:56:58,960 - INFO - File updated: 6002 - q1
+2025-07-03 15:56:58,982 - INFO - File updated: 6002 - q1
+2025-07-03 15:56:58,983 - INFO - Queue call: 6002 joined queue
+2025-07-03 15:56:58,983 - INFO - File updated: 6002 - q1
+2025-07-03 15:56:58,984 - INFO - Queue call: 6002 joined queue
+2025-07-03 15:57:11,111 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 15:57:11,111 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 15:57:11,114 - INFO - Display cleared
+2025-07-03 15:57:11,114 - INFO - Display cleared
+2025-07-03 16:00:38,152 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:01:49,777 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:05:38,180 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:06:49,804 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:10:38,206 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:11:49,849 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:11:54,841 - INFO - File updated: 6001 - 
+2025-07-03 16:11:54,841 - INFO - File updated: 6001 - 
+2025-07-03 16:11:54,843 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:11:54,844 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:11:59,844 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:11:59,848 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:11:59,856 - INFO - AMI authentication successful
+2025-07-03 16:11:59,856 - INFO - Reconnection successful
+2025-07-03 16:12:04,996 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:12:04,997 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:12:05,084 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:12:05,086 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:12:09,997 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:12:10,087 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:12:10,149 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:12:10,157 - INFO - AMI authentication successful
+2025-07-03 16:12:10,157 - INFO - Reconnection successful
+2025-07-03 16:12:10,157 - INFO - Reconnection successful
+2025-07-03 16:12:18,902 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:12:18,902 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:12:18,903 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:12:23,904 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:12:23,932 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:12:23,932 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:12:23,938 - INFO - AMI authentication successful
+2025-07-03 16:12:23,939 - INFO - Reconnection successful
+2025-07-03 16:12:23,939 - INFO - Reconnection successful
+2025-07-03 16:12:51,879 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:12:51,881 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:12:51,886 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:12:54,863 - INFO - Watchdog: No activity for 60s. Clearing stuck call.
+2025-07-03 16:12:54,867 - INFO - Display cleared
+2025-07-03 16:12:56,886 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:12:56,889 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:12:58,225 - INFO - Watchdog: No activity for 63s. Clearing stuck call.
+2025-07-03 16:12:58,230 - INFO - Display cleared
+2025-07-03 16:12:58,328 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:12:58,332 - INFO - AMI authentication successful
+2025-07-03 16:12:58,333 - INFO - Reconnection successful
+2025-07-03 16:12:58,333 - INFO - AMI authentication successful
+2025-07-03 16:12:58,334 - INFO - Reconnection successful
+2025-07-03 16:13:55,214 - INFO - File updated: 6002 - 
+2025-07-03 16:13:55,214 - INFO - File updated: 6002 - 
+2025-07-03 16:13:55,230 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:13:55,230 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:13:55,231 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:13:55,231 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:14:00,232 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:14:10,032 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:14:10,032 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:14:11,334 - INFO - AMI authentication successful
+2025-07-03 16:14:11,335 - INFO - Reconnection successful
+2025-07-03 16:14:11,337 - INFO - AMI authentication successful
+2025-07-03 16:14:11,337 - INFO - Reconnection successful
+2025-07-03 16:14:14,198 - INFO - File updated: 6002 - q1
+2025-07-03 16:14:14,199 - INFO - File updated: 6002 - q1
+2025-07-03 16:14:14,234 - INFO - File updated: 6002 - q1
+2025-07-03 16:14:14,234 - INFO - File updated: 6002 - q1
+2025-07-03 16:14:14,234 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:14:14,234 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:14:29,481 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:14:29,485 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:14:29,485 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:14:34,487 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:14:48,999 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:14:48,999 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:14:49,085 - INFO - AMI authentication successful
+2025-07-03 16:14:49,085 - INFO - AMI authentication successful
+2025-07-03 16:14:49,085 - INFO - Reconnection successful
+2025-07-03 16:14:49,086 - INFO - Reconnection successful
+2025-07-03 16:15:14,880 - INFO - Watchdog: No activity for 60s. Clearing stuck call.
+2025-07-03 16:15:14,882 - INFO - Display cleared
+2025-07-03 16:15:18,244 - INFO - Watchdog: No activity for 64s. Clearing stuck call.
+2025-07-03 16:15:18,247 - INFO - Display cleared
+2025-07-03 16:15:38,249 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:16:49,891 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:17:40,972 - INFO - File updated: 6002 - 
+2025-07-03 16:17:40,972 - INFO - File updated: 6002 - 
+2025-07-03 16:17:51,048 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:17:51,050 - INFO - Display cleared
+2025-07-03 16:17:51,051 - INFO - Display cleared
+2025-07-03 16:18:01,802 - INFO - File updated: 6002 - q1
+2025-07-03 16:18:01,803 - INFO - File updated: 6002 - q1
+2025-07-03 16:18:01,835 - INFO - File updated: 6002 - q1
+2025-07-03 16:18:01,835 - INFO - File updated: 6002 - q1
+2025-07-03 16:18:01,835 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:18:01,836 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:18:14,752 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:18:14,753 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:18:14,755 - INFO - Display cleared
+2025-07-03 16:18:14,755 - INFO - Display cleared
+2025-07-03 16:20:38,303 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:21:49,929 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:23:35,963 - INFO - File updated: 6002 - 
+2025-07-03 16:23:35,963 - INFO - File updated: 6002 - 
+2025-07-03 16:23:46,035 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:23:46,037 - INFO - Display cleared
+2025-07-03 16:23:46,037 - INFO - Display cleared
+2025-07-03 16:23:54,786 - INFO - File updated: 6002 - q1
+2025-07-03 16:23:54,789 - INFO - File updated: 6002 - q1
+2025-07-03 16:23:54,806 - INFO - File updated: 6002 - q1
+2025-07-03 16:23:54,806 - INFO - File updated: 6002 - q1
+2025-07-03 16:23:54,807 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:23:54,807 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:24:06,382 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:24:06,382 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:24:06,384 - INFO - Display cleared
+2025-07-03 16:24:33,549 - INFO - File updated: 6001 - 
+2025-07-03 16:24:33,550 - INFO - File updated: 6001 - 
+2025-07-03 16:24:43,613 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 16:24:43,613 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 16:24:43,614 - INFO - Display cleared
+2025-07-03 16:24:43,614 - INFO - Display cleared
+2025-07-03 16:24:51,959 - INFO - File updated: 6001 - q1
+2025-07-03 16:24:51,963 - INFO - File updated: 6001 - q1
+2025-07-03 16:24:51,985 - INFO - File updated: 6001 - q1
+2025-07-03 16:24:51,986 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:24:51,987 - INFO - File updated: 6001 - q1
+2025-07-03 16:24:51,987 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:25:07,223 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 16:25:07,224 - INFO - Display cleared
+2025-07-03 16:25:07,224 - INFO - Display cleared
+2025-07-03 16:25:38,374 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:26:49,964 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:26:53,007 - INFO - File updated: 6001 - 
+2025-07-03 16:26:53,008 - INFO - File updated: 6001 - 
+2025-07-03 16:27:03,177 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 16:27:03,177 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 16:27:03,179 - INFO - Display cleared
+2025-07-03 16:27:11,882 - INFO - File updated: 6001 - q1
+2025-07-03 16:27:11,911 - INFO - File updated: 6001 - q1
+2025-07-03 16:27:11,912 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:27:11,912 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:27:24,206 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 16:27:24,208 - INFO - Display cleared
+2025-07-03 16:27:24,209 - INFO - Display cleared
+2025-07-03 16:28:21,553 - INFO - File updated: 6001 - 
+2025-07-03 16:28:31,566 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:28:31,567 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:28:31,567 - INFO - Display cleared
+2025-07-03 16:28:31,568 - INFO - Display cleared
+2025-07-03 16:28:46,631 - INFO - File updated: 6001 - q1
+2025-07-03 16:28:46,801 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:28:46,802 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:28:46,803 - INFO - File updated: 6001 - q1
+2025-07-03 16:28:46,804 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:28:51,803 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:28:51,819 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:28:51,824 - INFO - AMI authentication successful
+2025-07-03 16:28:51,825 - INFO - Reconnection successful
+2025-07-03 16:28:58,565 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:28:58,565 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:28:58,567 - INFO - Display cleared
+2025-07-03 16:30:38,411 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:31:50,053 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:31:54,590 - INFO - File updated: 6001 - 
+2025-07-03 16:31:54,591 - INFO - File updated: 6001 - 
+2025-07-03 16:32:04,665 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:32:04,665 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:32:04,665 - INFO - Display cleared
+2025-07-03 16:32:04,668 - INFO - Display cleared
+2025-07-03 16:32:14,106 - INFO - File updated: 6001 - q1
+2025-07-03 16:32:14,106 - INFO - File updated: 6001 - q1
+2025-07-03 16:32:14,142 - INFO - File updated: 6001 - q1
+2025-07-03 16:32:14,143 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:32:14,155 - INFO - File updated: 6001 - q1
+2025-07-03 16:32:14,155 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:32:31,728 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:32:31,729 - INFO - Display cleared
+2025-07-03 16:34:10,823 - INFO - File updated: 6001 - 
+2025-07-03 16:34:10,824 - INFO - File updated: 6001 - 
+2025-07-03 16:34:20,899 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:34:20,900 - INFO - Display cleared
+2025-07-03 16:34:30,498 - INFO - File updated: 6001 - q1
+2025-07-03 16:34:30,498 - INFO - File updated: 6001 - q1
+2025-07-03 16:34:30,530 - INFO - File updated: 6001 - q1
+2025-07-03 16:34:30,530 - INFO - File updated: 6001 - q1
+2025-07-03 16:34:30,530 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:34:30,531 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:35:33,480 - INFO - Watchdog: No activity for 62s. Clearing stuck call.
+2025-07-03 16:35:33,481 - INFO - Display cleared
+2025-07-03 16:35:35,075 - INFO - Watchdog: No activity for 64s. Clearing stuck call.
+2025-07-03 16:35:35,077 - INFO - Display cleared
+2025-07-03 16:35:38,482 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:36:05,312 - INFO - File updated: 6002 - 
+2025-07-03 16:36:05,312 - INFO - File updated: 6002 - 
+2025-07-03 16:36:15,383 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:36:15,385 - INFO - Display cleared
+2025-07-03 16:36:15,386 - INFO - Display cleared
+2025-07-03 16:36:50,085 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:37:07,995 - INFO - File updated: 6002 - 
+2025-07-03 16:37:07,995 - INFO - File updated: 6002 - 
+2025-07-03 16:37:18,070 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:37:18,073 - INFO - Display cleared
+2025-07-03 16:37:18,073 - INFO - Display cleared
+2025-07-03 16:37:28,964 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 16:37:28,966 - INFO - File updated: 6002 - q1
+2025-07-03 16:37:28,966 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 16:37:28,970 - INFO - File updated: 6002 - q1
+2025-07-03 16:37:28,970 - INFO - Queue call: 6002 joined queue
+2025-07-03 16:37:33,969 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 16:37:33,990 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 16:37:33,994 - INFO - AMI authentication successful
+2025-07-03 16:37:33,995 - INFO - Reconnection successful
+2025-07-03 16:37:50,361 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:37:50,363 - INFO - Display cleared
+2025-07-03 16:40:38,573 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:41:50,134 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:46:50,174 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:51:50,215 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 16:55:19,710 - INFO - File updated: 6001 - 
+2025-07-03 16:55:29,781 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 16:55:29,783 - INFO - Display cleared
+2025-07-03 16:55:46,728 - INFO - File updated: 6001 - q1
+2025-07-03 16:55:46,757 - INFO - File updated: 6001 - q1
+2025-07-03 16:55:46,757 - INFO - Queue call: 6001 joined queue
+2025-07-03 16:56:19,709 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 16:56:19,712 - INFO - Display cleared
+2025-07-03 16:56:50,284 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:01:50,312 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:01:56,939 - INFO - File updated: 6001 - 
+2025-07-03 17:02:07,051 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:02:07,054 - INFO - Display cleared
+2025-07-03 17:02:24,305 - INFO - File updated: 6001 - q1
+2025-07-03 17:02:24,335 - INFO - File updated: 6001 - q1
+2025-07-03 17:02:24,335 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:02:42,115 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:02:42,116 - INFO - Display cleared
+2025-07-03 17:06:50,348 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:07:57,577 - INFO - File updated: 6001 - 
+2025-07-03 17:08:07,637 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:08:07,639 - INFO - Display cleared
+2025-07-03 17:08:17,508 - INFO - File updated: 6001 - q1
+2025-07-03 17:08:17,538 - INFO - File updated: 6001 - q1
+2025-07-03 17:08:17,539 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:08:43,053 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:08:43,054 - INFO - Display cleared
+2025-07-03 17:11:28,235 - INFO - File updated: 6001 - 
+2025-07-03 17:11:38,324 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:11:38,324 - INFO - Display cleared
+2025-07-03 17:11:50,504 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:11:53,212 - INFO - File updated: 6001 - q1
+2025-07-03 17:11:53,243 - INFO - File updated: 6001 - q1
+2025-07-03 17:11:53,243 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:12:07,072 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:12:07,076 - INFO - Display cleared
+2025-07-03 17:13:25,938 - INFO - File updated: 6002 - 
+2025-07-03 17:13:35,998 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:13:35,999 - INFO - Display cleared
+2025-07-03 17:13:49,185 - INFO - File updated: 6002 - q1
+2025-07-03 17:13:49,219 - INFO - File updated: 6002 - q1
+2025-07-03 17:13:49,220 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:14:36,106 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:14:36,107 - INFO - Display cleared
+2025-07-03 17:15:10,424 - INFO - File updated: 6001 - 
+2025-07-03 17:15:20,370 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:15:20,370 - INFO - Display cleared
+2025-07-03 17:15:36,961 - INFO - File updated: 6001 - q1
+2025-07-03 17:15:36,966 - INFO - File updated: 6001 - q1
+2025-07-03 17:15:36,967 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:15:59,477 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:15:59,478 - INFO - Display cleared
+2025-07-03 17:16:50,525 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:21:26,323 - INFO - File updated: 6001 - 
+2025-07-03 17:21:36,680 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:21:36,681 - INFO - Display cleared
+2025-07-03 17:21:49,497 - INFO - File updated: 6001 - q1
+2025-07-03 17:21:49,530 - INFO - File updated: 6001 - q1
+2025-07-03 17:21:49,532 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:22:13,407 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:22:13,408 - INFO - Display cleared
+2025-07-03 17:22:15,554 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:27:15,633 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:28:09,290 - INFO - File updated: 6001 - 
+2025-07-03 17:28:19,351 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:28:19,352 - INFO - Display cleared
+2025-07-03 17:28:29,225 - INFO - File updated: 6001 - q1
+2025-07-03 17:28:29,255 - INFO - File updated: 6001 - q1
+2025-07-03 17:28:29,256 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:28:46,530 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:28:46,532 - INFO - Display cleared
+2025-07-03 17:29:24,673 - INFO - File updated: 6002 - 
+2025-07-03 17:29:34,747 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:29:34,748 - INFO - Display cleared
+2025-07-03 17:29:43,495 - INFO - File updated: 6002 - q1
+2025-07-03 17:29:43,542 - INFO - File updated: 6002 - q1
+2025-07-03 17:29:43,543 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:29:59,379 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:29:59,381 - INFO - Display cleared
+2025-07-03 17:30:52,135 - INFO - File updated: 6001 - 
+2025-07-03 17:31:02,198 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:31:02,200 - INFO - Display cleared
+2025-07-03 17:31:12,807 - INFO - File updated: 6001 - q1
+2025-07-03 17:31:12,836 - INFO - File updated: 6001 - q1
+2025-07-03 17:31:12,837 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:31:28,760 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:31:28,760 - INFO - Display cleared
+2025-07-03 17:32:15,682 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:33:06,785 - INFO - File updated: 6001 - 
+2025-07-03 17:33:16,882 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:33:16,884 - INFO - Display cleared
+2025-07-03 17:33:28,072 - INFO - File updated: 6001 - q1
+2025-07-03 17:33:28,100 - INFO - File updated: 6001 - q1
+2025-07-03 17:33:28,101 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:33:43,075 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:33:43,077 - INFO - Display cleared
+2025-07-03 17:37:15,735 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:37:29,965 - INFO - File updated: 6001 - 
+2025-07-03 17:37:37,114 - INFO - File updated: 6002 - 
+2025-07-03 17:37:47,185 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:37:47,186 - INFO - Display cleared
+2025-07-03 17:37:52,668 - INFO - File updated: 6001 - q1
+2025-07-03 17:37:52,695 - INFO - File updated: 6001 - q1
+2025-07-03 17:37:52,696 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:37:59,654 - INFO - File updated: 6002 - q1
+2025-07-03 17:37:59,673 - INFO - File updated: 6002 - q1
+2025-07-03 17:37:59,674 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:38:06,722 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:38:09,648 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:38:09,649 - INFO - Display cleared
+2025-07-03 17:40:29,078 - INFO - File updated: 6001 - 
+2025-07-03 17:40:39,255 - ERROR - AMI connection error: Empty data from AMI. Reconnecting...
+2025-07-03 17:40:39,256 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-03 17:40:44,256 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-03 17:40:44,260 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-03 17:40:44,265 - INFO - AMI authentication successful
+2025-07-03 17:40:44,266 - INFO - Reconnection successful
+2025-07-03 17:40:48,174 - INFO - File updated: 6001 - q1
+2025-07-03 17:40:48,204 - INFO - File updated: 6001 - q1
+2025-07-03 17:40:48,205 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:41:06,143 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:41:06,144 - INFO - Display cleared
+2025-07-03 17:41:37,563 - INFO - File updated: 6002 - 
+2025-07-03 17:41:47,620 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:41:47,621 - INFO - Display cleared
+2025-07-03 17:41:56,397 - INFO - File updated: 6002 - q1
+2025-07-03 17:41:56,417 - INFO - File updated: 6002 - q1
+2025-07-03 17:41:56,418 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:42:12,145 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:42:12,146 - INFO - Display cleared
+2025-07-03 17:42:15,781 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:42:48,762 - INFO - File updated: 6002 - 
+2025-07-03 17:42:58,824 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:42:58,826 - INFO - Display cleared
+2025-07-03 17:43:11,449 - INFO - File updated: 6002 - q1
+2025-07-03 17:43:11,477 - INFO - File updated: 6002 - q1
+2025-07-03 17:43:11,479 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:43:33,296 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:43:33,298 - INFO - Display cleared
+2025-07-03 17:47:15,852 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-03 17:47:23,865 - INFO - File updated: 6002 - 
+2025-07-03 17:47:33,886 - INFO - Call answered: DAHDI/o1-1
+2025-07-03 17:47:33,888 - INFO - Display cleared
+2025-07-03 17:47:43,208 - INFO - File updated: 6002 - q1
+2025-07-03 17:47:43,242 - INFO - File updated: 6002 - q1
+2025-07-03 17:47:43,243 - INFO - Queue call: 6002 joined queue
+2025-07-03 17:48:03,053 - INFO - Call hung up: DAHDI/o1-1
+2025-07-03 17:48:03,054 - INFO - Display cleared
+2025-07-03 17:49:21,927 - INFO - File updated: 6001 - 
+2025-07-03 17:49:31,990 - INFO - Call answered: DAHDI/o2-1
+2025-07-03 17:49:31,991 - INFO - Display cleared
+2025-07-03 17:49:41,558 - INFO - File updated: 6001 - q1
+2025-07-03 17:49:41,607 - INFO - File updated: 6001 - q1
+2025-07-03 17:49:41,607 - INFO - Queue call: 6001 joined queue
+2025-07-03 17:50:01,770 - INFO - Call hung up: DAHDI/o2-1
+2025-07-03 17:50:01,770 - INFO - Display cleared
+2025-07-04 10:27:30,252 - INFO - Starting Caller ID Monitor...
+2025-07-04 10:27:30,253 - INFO - Testing AMI connection...
+2025-07-04 10:27:30,254 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-04 10:27:30,261 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-04 10:27:30,264 - INFO - AMI authentication successful
+2025-07-04 10:27:30,264 - INFO - AMI connection test successful
+2025-07-04 10:27:30,265 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-04 10:27:30,269 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-04 10:27:30,396 - INFO - AMI authentication successful
+2025-07-04 10:29:22,658 - INFO - File updated: 6001 - 
+2025-07-04 10:29:32,722 - INFO - Call answered: DAHDI/o1-1
+2025-07-04 10:29:32,722 - INFO - Display cleared
+2025-07-04 10:29:44,124 - INFO - File updated: 6001 - q1
+2025-07-04 10:29:44,149 - INFO - File updated: 6001 - q1
+2025-07-04 10:29:44,149 - INFO - Queue call: 6001 joined queue
+2025-07-04 10:30:09,755 - INFO - Call hung up: DAHDI/o1-1
+2025-07-04 10:30:09,757 - INFO - Display cleared
+2025-07-04 10:32:30,428 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 10:34:24,432 - INFO - File updated: 6001 - 
+2025-07-04 10:34:34,490 - INFO - Call answered: DAHDI/o2-1
+2025-07-04 10:34:34,491 - INFO - Display cleared
+2025-07-04 10:34:44,709 - INFO - File updated: 6001 - q1
+2025-07-04 10:34:44,737 - INFO - File updated: 6001 - q1
+2025-07-04 10:34:44,737 - INFO - Queue call: 6001 joined queue
+2025-07-04 10:35:05,838 - INFO - Call hung up: DAHDI/o2-1
+2025-07-04 10:35:05,839 - INFO - Display cleared
+2025-07-04 10:37:30,455 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 10:42:30,482 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 10:47:30,513 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 10:52:30,542 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 10:57:30,561 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:02:30,582 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:07:30,606 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:12:30,642 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:17:30,683 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:22:30,733 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:27:30,781 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:32:30,809 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:37:30,862 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:42:30,884 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:47:30,912 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:52:30,943 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 11:57:30,969 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:02:30,996 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:07:31,022 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:12:31,048 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:17:31,075 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:22:31,102 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:27:31,127 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:32:31,153 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:35:14,931 - INFO - File updated: 6002 - 
+2025-07-04 12:35:24,993 - INFO - Call answered: DAHDI/o1-1
+2025-07-04 12:35:24,995 - INFO - Display cleared
+2025-07-04 12:35:38,829 - INFO - File updated: 6002 - q1
+2025-07-04 12:35:38,847 - INFO - File updated: 6002 - q1
+2025-07-04 12:35:38,847 - INFO - Queue call: 6002 joined queue
+2025-07-04 12:35:51,105 - INFO - Call hung up: DAHDI/o1-1
+2025-07-04 12:35:51,106 - INFO - Display cleared
+2025-07-04 12:37:31,183 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:40:29,632 - INFO - File updated: 6002 - 
+2025-07-04 12:40:39,636 - INFO - Call answered: DAHDI/o1-1
+2025-07-04 12:40:39,638 - INFO - Display cleared
+2025-07-04 12:40:57,294 - INFO - File updated: 6002 - q1
+2025-07-04 12:40:57,300 - INFO - File updated: 6002 - q1
+2025-07-04 12:40:57,301 - INFO - Queue call: 6002 joined queue
+2025-07-04 12:42:01,204 - INFO - Watchdog: No activity for 63s. Clearing stuck call.
+2025-07-04 12:42:01,206 - INFO - Display cleared
+2025-07-04 12:42:31,210 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:47:31,242 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:52:31,267 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 12:57:31,294 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:02:31,319 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:07:31,344 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:12:31,370 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:17:31,398 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:22:31,425 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:27:31,452 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:32:31,480 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:37:31,508 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:42:31,532 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:47:31,563 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:52:31,589 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 13:57:31,615 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:02:31,642 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:07:31,670 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:12:31,699 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:17:31,726 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:22:31,755 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:27:31,783 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:32:31,810 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:37:31,837 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:42:31,866 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:44:49,830 - INFO - File updated: 6001 - 
+2025-07-04 14:44:59,996 - INFO - Call answered: DAHDI/o1-1
+2025-07-04 14:44:59,997 - INFO - Display cleared
+2025-07-04 14:45:12,327 - INFO - File updated: 6001 - q1
+2025-07-04 14:45:12,344 - INFO - File updated: 6001 - q1
+2025-07-04 14:45:12,344 - INFO - Queue call: 6001 joined queue
+2025-07-04 14:45:30,947 - INFO - Call hung up: DAHDI/o1-1
+2025-07-04 14:45:30,948 - INFO - Display cleared
+2025-07-04 14:47:31,892 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:52:31,921 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 14:57:31,944 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:02:31,998 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:07:32,026 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:12:32,082 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:17:32,104 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:22:32,145 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:27:32,179 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:32:32,205 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:37:32,304 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:42:32,465 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:47:32,495 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:52:32,522 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 15:57:32,553 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:02:32,583 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:07:32,611 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:12:32,648 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:17:32,688 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:22:32,715 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:27:32,741 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:32:32,768 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-04 16:37:32,795 - INFO - AMI Monitor: Connection stable, monitoring for calls...

@@ -124,7 +124,7 @@ function startQueueMonitoring() {
     checkQueue();
     
     // Set up 30-second interval
-    monitorInterval = setInterval(checkQueue, 30000);
+    monitorInterval = setInterval(checkQueue, 10000);
 }
 
 function stopQueueMonitoring() {

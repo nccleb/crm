@@ -191,8 +191,8 @@ class CallAlertManager:
         if not last_sent:
             return True
         
-        # Don't send same alert within 12 hours
-        if (current_time - last_sent).total_seconds() < 43200:
+        # Don't send same alert within 24 hours
+        if (current_time - last_sent).total_seconds() < 86000:
             return False
         
         return True
@@ -525,119 +525,6 @@ class AgentDetailsView(View):
         return filtered_results
 
 
-# class RealTimeMonitorView(View):
-#     """Real-time monitoring endpoint for continuous queue checking"""
-    
-#     def get(self, request):
-#         """Return current queue status and alerts"""
-#         try:
-#             # Get current time parameters for real-time check
-#             now = datetime.now()
-            
-#             # FIXED: Proper time formatting for API
-#             # Check calls from beginning of today to now
-#             start_time = now.strftime('%Y-%m-%d ')
-#             end_time = now.strftime('%Y-%m-%d ')
-            
-#             logger.info(f"Real-time monitor: checking from {start_time} to {end_time}")
-            
-#             # Get API cookie
-#             agent_view = AgentDetailsView()
-#             cookie = agent_view.get_api_cookie()
-            
-#             if not cookie:
-#                 logger.error("Failed to get API cookie for real-time monitoring")
-#                 return JsonResponse({
-#                     'status': 'error', 
-#                     'message': 'API authentication failed',
-#                     'timestamp': now.isoformat()
-#                 })
-            
-#             # Get current queue data for all queues and agents
-#             que = '6500'  # Define queue as 'all' for real-time monitoring
-#             agent = 'all'  # Define agent as 'all' for real-time monitoring
-#             queue_data = agent_view.get_queue_data(cookie, start_time, end_time, que, agent)
-            
-#             if queue_data is None:
-#                 logger.warning("No queue data returned from API")
-#                 return JsonResponse({
-#                     'status': 'no_data', 
-#                     'alerts': [], 
-#                     'timestamp': now.isoformat(),
-#                     'message': 'Failed to retrieve queue data from API',
-#                     'start_time': start_time,
-#                     'end_time': end_time,
-#                     'debug_info': 'API returned None - check API connection and authentication'
-#                 })
-            
-#             if not queue_data:  # Empty list
-#                 logger.info("No active calls found")
-#                 return JsonResponse({
-#                     'status': 'no_active_calls', 
-#                     'alerts': [], 
-#                     'timestamp': now.isoformat(),
-#                     'message': 'No active calls found in the specified time range',
-#                     'start_time': start_time,
-#                     'end_time': end_time,
-#                     'total_records': 0
-#                 })
-            
-#             logger.info(f"Processing {len(queue_data)} queue records for alerts")
-            
-#             # Debug: Log first few records to understand data structure
-#             if len(queue_data) > 0:
-#                 logger.info(f"Sample queue record: {json.dumps(queue_data[0], indent=2)}")
-            
-#             # Check for alerts
-#             alerts = alert_manager.check_queue_for_alerts(queue_data, "Real-time Monitor")
-            
-#             # Send email alerts
-#             for alert in alerts:
-#                 try:
-#                     alert_manager.send_alert_email(alert)
-#                     logger.info(f"Alert sent: {alert['type']} for {alert['caller_number']}")
-#                 except Exception as email_error:
-#                     logger.error(f"Failed to send alert email: {email_error}")
-            
-#             # Count waiting calls (connect = 'no')
-#             waiting_calls = 0
-#             connected_calls = 0
-            
-#             for item in queue_data:
-#                 agent_data = item.get('agent', {})
-#                 if agent_data.get('agent') != 'NONE':
-#                     if agent_data.get('connect') == 'no':
-#                         waiting_calls += 1
-#                     elif agent_data.get('connect') == 'yes':
-#                         connected_calls += 1
-
-#             # Return detailed status
-#             return JsonResponse({
-#                 'status': 'success',
-#                 'timestamp': now.isoformat(),
-#                 'alerts_count': len(alerts),
-#                 'alerts': alerts,
-#                 'total_calls': len(queue_data),
-#                 'waiting_calls': waiting_calls,
-#                 'connected_calls': connected_calls,
-#                 'monitoring_period': f"{start_time} to {end_time}",
-#                 'debug_info': {
-#                     'api_cookie_length': len(cookie) if cookie else 0,
-#                     'first_record_keys': list(queue_data[0].keys()) if queue_data else [],
-#                     'sample_agent_data': queue_data[0].get('agent', {}) if queue_data else {}
-#                 }
-#             })
-
-#         except Exception as e:
-#             logger.error(f"Real-time monitoring error: {str(e)}")
-#             import traceback
-#             logger.error(f"Traceback: {traceback.format_exc()}")
-#             return JsonResponse({
-#                 'status': 'error', 
-#                 'message': str(e),
-#                 'timestamp': datetime.now().isoformat(),
-#                 'traceback': traceback.format_exc()
-#             })
 
 
 
@@ -707,7 +594,7 @@ def test_realtime_data(request):
                     wait_seconds = alert_manager.parse_wait_time(wait_time)
                     output.append(f"  -> Wait seconds: {wait_seconds}")
                     
-                    if connect_status == 'no' and wait_seconds > 30:
+                    if connect_status == 'no' and wait_seconds > 5:
                         output.append(f"  -> ⚠️ Would trigger alert!")
             
             # Send email alerts (now alerts is always defined and contains all alerts)
