@@ -2008,3 +2008,12 @@ Message: Authentication failed
 2025-07-10 15:12:43,169 - INFO - Connecting to AMI at 192.168.20.216:7777
 2025-07-10 15:12:43,176 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
 2025-07-10 15:12:43,179 - INFO - AMI authentication successful
+2025-07-10 15:15:22,042 - INFO - Starting Caller ID Monitor...
+2025-07-10 15:15:22,042 - INFO - Testing AMI connection...
+2025-07-10 15:15:22,043 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 15:15:22,082 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 15:15:22,089 - INFO - AMI authentication successful
+2025-07-10 15:15:22,090 - INFO - AMI connection test successful
+2025-07-10 15:15:22,091 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 15:15:22,095 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 15:15:22,099 - INFO - AMI authentication successful
