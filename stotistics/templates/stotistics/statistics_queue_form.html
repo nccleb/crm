@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+   
+    <title>Total Statistics</title>
+    
+     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'main.min.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{% static 'test371.js' %}"></script>
+         <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'stylei.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+   
+</head>
+<body>
+    <div class="jumbotron">
+        <p style="text-align:center;font-size:25px;" id="form">Total Statistics</p>
+        
+        <!-- Display Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+        <table>
+            <tr>
+                <td valign="top" style="align:left">
+                    <form method="post" action="{% url 'stotisticss:statistics_queue_results' %}">
+                        {% csrf_token %}
+                        
+                        {{ form.start_date }}
+                        {{ form.end_date }}
+                        {{ form.queue_number }}
+                       
+                        <input class="whatsappbutton" type="submit" value="Search">
+                        <button type="button" class="whatsappbutton" onclick="quit()">Quit</button>
+                        <button type="button" class="whatsappbutton" onclick="refresh()">Reload</button>
+                    </form>
+                    <br/><br/>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        // JavaScript functions equivalent to your original JS
+         
+        function quit() {
+    window.location.href = "{% url 'getfirstline' %}";  // Replace with your actual URL name
+}
+        
+        
+        function refresh() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

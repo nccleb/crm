@@ -1952,3 +1952,59 @@ Message: Authentication failed
 2025-07-04 16:27:32,741 - INFO - AMI Monitor: Connection stable, monitoring for calls...
 2025-07-04 16:32:32,768 - INFO - AMI Monitor: Connection stable, monitoring for calls...
 2025-07-04 16:37:32,795 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-10 11:24:57,454 - INFO - Starting Caller ID Monitor...
+2025-07-10 11:24:57,455 - INFO - Testing AMI connection...
+2025-07-10 11:24:57,456 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 11:24:57,542 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 11:24:58,548 - ERROR - AMI connection test failed: Failed to connect to AMI: AMI authentication failed - check username/password: Response: Error
+Message: Authentication failed
+2025-07-10 11:24:58,548 - ERROR - Initial connection test failed. Please check:
+2025-07-10 11:24:58,549 - ERROR - - Host: 192.168.20.216
+2025-07-10 11:24:58,549 - ERROR - - Port: 7777
+2025-07-10 11:24:58,549 - ERROR - - Username: amiuser1
+2025-07-10 11:24:58,549 - ERROR - - Password: [hidden]
+2025-07-10 11:24:58,550 - ERROR - - AMI is enabled in Asterisk manager.conf
+2025-07-10 11:24:58,550 - ERROR - - Firewall allows connection to AMI port
+2025-07-10 11:27:59,155 - INFO - Starting Caller ID Monitor...
+2025-07-10 11:27:59,156 - INFO - Testing AMI connection...
+2025-07-10 11:27:59,157 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 11:27:59,229 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 11:27:59,234 - INFO - AMI authentication successful
+2025-07-10 11:27:59,235 - INFO - AMI connection test successful
+2025-07-10 11:27:59,236 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 11:27:59,245 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 11:27:59,249 - INFO - AMI authentication successful
+2025-07-10 11:32:59,278 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-10 11:37:59,303 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-10 11:42:59,331 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-10 11:47:59,358 - INFO - AMI Monitor: Connection stable, monitoring for calls...
+2025-07-10 11:50:59,312 - ERROR - AMI connection error: [WinError 10054] An existing connection was forcibly closed by the remote host. Reconnecting...
+2025-07-10 11:50:59,312 - INFO - Reconnecting in 5.0s (attempt 1)
+2025-07-10 11:51:04,313 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 11:51:07,917 - ERROR - Reconnection failed: Failed to connect to AMI: [WinError 10061] No connection could be made because the target machine actively refused it
+2025-07-10 11:51:07,919 - INFO - Reconnecting in 5.0s (attempt 2)
+2025-07-10 11:51:07,919 - ERROR - Critical error: file descriptor cannot be a negative integer (-1)
+2025-07-10 11:51:07,921 - INFO - Stopping Caller ID Monitor...
+2025-07-10 11:51:07,924 - INFO - Display cleared
+2025-07-10 15:09:38,038 - INFO - Starting Caller ID Monitor...
+2025-07-10 15:09:38,038 - INFO - Testing AMI connection...
+2025-07-10 15:09:38,039 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 15:09:38,042 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 15:09:39,048 - ERROR - AMI connection test failed: Failed to connect to AMI: AMI authentication failed - check username/password: Response: Error
+Message: Authentication failed
+2025-07-10 15:09:39,048 - ERROR - Initial connection test failed. Please check:
+2025-07-10 15:09:39,049 - ERROR - - Host: 192.168.20.216
+2025-07-10 15:09:39,050 - ERROR - - Port: 7777
+2025-07-10 15:09:39,050 - ERROR - - Username: amiuser1
+2025-07-10 15:09:39,051 - ERROR - - Password: [hidden]
+2025-07-10 15:09:39,052 - ERROR - - AMI is enabled in Asterisk manager.conf
+2025-07-10 15:09:39,052 - ERROR - - Firewall allows connection to AMI port
+2025-07-10 15:12:42,640 - INFO - Starting Caller ID Monitor...
+2025-07-10 15:12:42,640 - INFO - Testing AMI connection...
+2025-07-10 15:12:42,641 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 15:12:42,647 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 15:12:43,168 - INFO - AMI authentication successful
+2025-07-10 15:12:43,168 - INFO - AMI connection test successful
+2025-07-10 15:12:43,169 - INFO - Connecting to AMI at 192.168.20.216:7777
+2025-07-10 15:12:43,176 - INFO - AMI Banner: Asterisk Call Manager/2.7.0
+2025-07-10 15:12:43,179 - INFO - AMI authentication successful
