@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Search</title>
+    
+    
+    
+    
+    <!-- Include JavaScript -->
+   
+    
+    {% load static %}
+     <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'main.min.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{% static 'test371.js' %}"></script>
+         <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'stylei.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+   
+</head>
+<body>
+    <div class="jumbotron">
+        <p id="form" style="text-align:center;font-size:25px;">Agent Search</p>
+
+        <!-- Display Django messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <table>
+            <tr>
+                <td valign="top" style="align:left">
+                    <form method="post" action="{% url 'queuestats:agent_details' %}">
+                        {% csrf_token %}
+                        
+                        <input type="date" id="sta" name="sta" placeholder="start time" class="form-control" required>
+                        <input type="date" id="end" name="end" placeholder="end time" class="form-control" required>
+                        <input type="text" id="que" name="que" placeholder="queue" class="form-control">
+                        <input type="text" id="age" name="age" placeholder="agent" class="form-control">
+                        
+                        <h5>connect</h5>
+                        <select class="form-control" name="con">
+                            <option value=""></option>
+                            <option value="yes">yes</option>
+                            <option value="no">no</option>
+                        </select>
+
+                        <input class="whatsappbutton" type="submit" value="Search">
+                        <button type="button" class="whatsappbutton" onclick="quit()">Quit</button>
+                        <button type="button" class="whatsappbutton" onclick="refresh()">Reload</button>
+                    </form>
+                    <br/><br/>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        // JavaScript functions that were in the original PHP
+        function quit() {
+    window.location.href = "{% url 'getfirstline' %}";  // Replace with your actual URL name
+}
+        
+        function refresh() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>

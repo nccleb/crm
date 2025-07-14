@@ -1,0 +1,51 @@
+{% load static  %}
+
+<!doctype html>
+
+<html>
+    <head>
+       
+
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="{% static 'main.min.css' %}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{% static 'test371.js' %}"></script>
+         <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+        
+    </head>
+    {% include 'core/partials/nav.html' %}
+    <body onload="stopQueueMonitoring()">
+        <p style="color: red; font-weight: bold; font-size: 18px; background-color: yellow; padding: 10px; border: 2px solid red; border-radius: 5px;">
+        The alert system is off
+       </p>
+
+
+
+       
+       
+
+
+        
+        
+        
+    
+
+
+        
+        
+</div>
+</div>
+</div>
+
+
+{% include 'core/partials/footer.html' %}
+</body>
+</html>

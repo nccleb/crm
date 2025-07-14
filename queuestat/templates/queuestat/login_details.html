@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Agent Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'main.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'test371.js' %}"></script>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'stylei.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body onload="size242()">
+    <div class="jumbotron">
+        <p style="text-align:center;font-size:25px;" id="page-title">Agent Details</p>
+        
+        {% if reload_needed %}
+            <button style="color:blue" type="button" class="whatsappbutton" onclick="refresh()">
+                <h4 style="color:Tomato;">Please Reload!</h4>
+            </button>
+        {% else %}
+            <!-- Printable content container -->
+            <div id="printable-content">
+                <div class="table-container">
+                    <table id="agent-table">
+                        <thead>
+                            <tr>
+                                <th>Queue Chairman</th>
+                                
+                                <th>Extension</th>
+                                <th>Agent</th>
+                                <th>login_date</th>
+                                <th>logoff_date</th>
+                                <th>online_time</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for agent in agent_data %}
+                                <tr>
+                                    <td>{{ agent.queuechairman }}</td>
+                                    <td>{{ agent.extesion }}</td>
+                                    <td>{{ agent.agent }}</td>
+                                    <td>{{ agent.login_data}}</td>
+                                    <td>{{ agent.logoff_data }}</td>
+                                    <td>{{ agent.online_time}}</td>
+                                    
+                                    
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="8" style="text-align: center;">No data found for the specified criteria.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="button-container" style="margin-top: 20px; text-align: center;">
+                <button class="whatsappbutton printPageButton" type="button" onclick="printTable()">Print</button>
+                <button class="whatsappbutton printPageButton" type="button" onclick="quit()">Quit</button>
+                <button class="whatsappbutton printPageButton" type="button" onclick="refresh()">Reload</button>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function quit() {
+    window.location.href = "{% url 'getfirstline' %}";  // Replace with your actual URL name
+}
+        
+        function refresh() {
+            location.reload();
+        }
+        
+        // Fixed print function
+        function printTable() {
+            // Get the printable content
+            var printContent = document.getElementById('printable-content');
+            var pageTitle = document.getElementById('page-title').innerHTML;
+            
+            // Create a new window for printing
+            var printWindow = window.open('', '_blank');
+            
+            // Write the HTML content to the new window
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Agent Details - Print</title>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            margin: 20px;
+                            color: black;
+                        }
+                        h1 { 
+                            text-align: center; 
+                            margin-bottom: 20px;
+                            color: black;
+                        }
+                        table { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            margin: 20px 0;
+                        }
+                        th, td { 
+                            border: 1px solid #000; 
+                            padding: 8px 12px; 
+                            text-align: left;
+                            color: black;
+                        }
+                        th { 
+                            background-color: #f0f0f0; 
+                            font-weight: bold;
+                        }
+                        tr:nth-child(even) { 
+                            background-color: #f9f9f9; 
+                        }
+                        .print-date {
+                            text-align: right;
+                            font-size: 12px;
+                            margin-top: 20px;
+                            color: #666;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${pageTitle}</h1>
+                    ${printContent.innerHTML}
+                    <div class="print-date">
+                        Printed on: ${new Date().toLocaleString()}
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            // Close the document and print
+            printWindow.document.close();
+            
+            // Wait for content to load then print
+            setTimeout(function() {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+        
+        // Alternative simple print function (if the above doesn't work)
+        function printContents(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = `
+                <h1 style="text-align: center; color: black;">Agent Details</h1>
+                ${printContents}
+            `;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Reload to restore functionality
+        }
+        
+        function size242() {
+            // Add your sizing logic here if needed
+        }
+    </script>
+</body>
+</html>

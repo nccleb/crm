@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Queue Statistics Results</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'main.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{% static 'test371.js' %}"></script>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link rel="stylesheet" href="{% static 'stylei.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body onload="size242()">
+    <div class="jumbotron">
+        <p style="text-align:center;font-size:25px;" id="page-title">Queue Statistics Results</p>
+        <p style="text-align:center;font-size:18px; margin-bottom: 20px;">
+            Period: {{ start_date }} to {{ end_date }}
+        </p>
+
+        {% if api_data.reload_required %}
+            <div style="text-align: center; margin: 20px 0;">
+                <button style="color:blue" type="button" class="whatsappbutton" onclick="refresh()">
+                    <h4 style="color:Tomato;">Please Reload!</h4>
+                </button>
+            </div>
+        {% else %}
+            <!-- Printable content container -->
+            <div id="printable-content">
+                <div class="table-container">
+                    <table id="statistics-table" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <thead>
+                            <tr style="background-color: #f0f0f0;">
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Metric</th>
+                                <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if api_data.queuechairman %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>Queue Chairman</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.queuechairman }}</td>
+                            </tr>
+                            {% endif %}
+
+                             {% if api_data.agent %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>Agent</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.agent }}</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if api_data.total_calls %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>Total Calls</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.total_calls }}</td>
+                            </tr>
+                            {% endif %}
+                            
+                            
+
+                           
+                            {% if api_data.answered_calls %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>answered_calls </strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.answered_calls }}</td>
+                            </tr>
+                            {% endif %}
+
+                             {% if api_data.answered_rate  %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>answered_rate  </strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.answered_rate  }}</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if api_data.avg_talk %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>Average Talk </strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.avg_talk }}</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if api_data.vq_total_calls %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>VQ Total Calls</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.vq_total_calls }}</td>
+                            </tr>
+                            {% endif %}
+                            
+                            {% if api_data.channel %}
+                            <tr>
+                                <td style="border: 1px solid #ddd; padding: 12px;"><strong>Channel</strong></td>
+                                <td style="border: 1px solid #ddd; padding: 12px;">{{ api_data.channel }}</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                    
+                    {% if not api_data.queuechairman and not api_data.total_calls and not api_data.abandoned_rate and not api_data.avg_wait and not api_data.avg_talk and not api_data.vq_total_calls %}
+                        <div style="text-align: center; margin: 20px 0; padding: 20px; background-color: #f8f9fa; border-radius: 4px;">
+                            <p style="font-size: 16px; color: #6c757d;">No statistics data available for the selected period.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="button-container" style="margin-top: 20px; text-align: center;">
+                <button class="whatsappbutton printPageButton" type="button" onclick="printTable()">Print</button>
+                <button class="whatsappbutton printPageButton" type="button" onclick="goBack()">Back to Form</button>
+                <button class="whatsappbutton printPageButton" type="button" onclick="quit()">Quit</button>
+                <button class="whatsappbutton printPageButton" type="button" onclick="refresh()">Reload</button>
+            </div>
+        {% endif %}
+        
+        <!-- Debug info (remove in production) -->
+        {% if page or page1 %}
+            <div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 4px; font-size: 12px;">
+                <strong>Debug Info:</strong><br>
+                {% if page %}Page: {{ page }}<br>{% endif %}
+                {% if page1 %}Page1: {{ page1 }}<br>{% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function quit() {
+            window.location.href = "{% url 'getfirstline' %}";  // Replace with your actual URL name
+        }
+        
+        function refresh() {
+            location.reload();
+        }
+        
+        function goBack() {
+            window.location.href = "{% url 'stotisticss:statistics_Agent_form' %}";
+        }
+        
+        // Print function
+        function printTable() {
+            var printContent = document.getElementById('printable-content');
+            var pageTitle = document.getElementById('page-title').innerHTML;
+            
+            var printWindow = window.open('', '_blank');
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Queue Statistics - Print</title>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            margin: 20px;
+                            color: black;
+                        }
+                        h1 { 
+                            text-align: center; 
+                            margin-bottom: 20px;
+                            color: black;
+                        }
+                        table { 
+                            width: 100%; 
+                            border-collapse: collapse; 
+                            margin: 20px 0;
+                        }
+                        th, td { 
+                            border: 1px solid #000; 
+                            padding: 8px 12px; 
+                            text-align: left;
+                            color: black;
+                        }
+                        th { 
+                            background-color: #f0f0f0; 
+                            font-weight: bold;
+                        }
+                        tr:nth-child(even) { 
+                            background-color: #f9f9f9; 
+                        }
+                        .print-date {
+                            text-align: right;
+                            font-size: 12px;
+                            margin-top: 20px;
+                            color: #666;
+                        }
+                        .period-info {
+                            text-align: center;
+                            font-size: 14px;
+                            margin-bottom: 20px;
+                            color: #333;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>${pageTitle}</h1>
+                    <div class="period-info">Period: {{ start_date }} to {{ end_date }}</div>
+                    ${printContent.innerHTML}
+                    <div class="print-date">
+                        Printed on: ${new Date().toLocaleString()}
+                    </div>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            
+            setTimeout(function() {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        }
+        
+        function size242() {
+            // Add your sizing logic here if needed
+        }
+    </script>
+</body>
+</html>
