@@ -524,7 +524,23 @@ class AgentDetailsView(View):
         
         return filtered_results
 
-
+class PauseSearchView(View):
+    """View for the search form (equivalent to test476.php)"""
+    
+    def get(self, request):
+        # Handle URL parameters like the original PHP
+        page = request.GET.get('page', '')
+        page1 = request.GET.get('page1', '')
+        
+        # Store in session like the original
+        request.session['page'] = page
+        request.session['page1'] = page1
+        
+        context = {
+            'page': page,
+            'page1': page1,
+        }
+        return render(request, 'queuestat/pause_search.html', context)
 
 
 class LoginSearchView(View):
@@ -547,6 +563,220 @@ class LoginSearchView(View):
 
 
 
+
+
+
+class PauseDetailsView(View):
+    """Enhanced view with integrated alert monitoring"""
+    
+    def post(self, request):
+        # Validate form data
+        sta = request.POST.get('sta')
+        end = request.POST.get('end')
+        que = request.POST.get('que')
+        age = request.POST.get('age')
+        
+        
+        # Check if required fields are present
+        if not all([sta, end]) or que is None or age is None :
+            messages.error(request, 'Missing Entry!')
+            return redirect('queuestats:pause_search')
+        
+        # Clean input data
+        sta = self.clean_input(sta)
+        end = self.clean_input(end)
+        que = self.clean_input(que) 
+        age = self.clean_input(age)
+        
+        
+        try:
+            # Get API data
+            cookie = self.get_api_cookie()
+            if not cookie:
+                messages.error(request, 'Failed to authenticate with API')
+                return redirect('queuestats:pause_search')
+                
+            # Get queue statistics
+            queue_data = self.get_queue_data(cookie, sta, end, que, age)
+            
+            if not queue_data:
+                context = {
+                    'reload_needed': True,
+                    'search_params': {
+                        'sta': sta, 'end': end, 'que': que, 'age': age
+                    }
+                }
+                return render(request, 'queuestat/pause_details.html', context)
+            
+           
+            # Filter data based on connection status
+            filtered_data = self.filter_data(queue_data)
+            
+            context = {
+                'agent_data': filtered_data,
+                'search_params': {
+                    'sta': sta, 'end': end, 'que': que, 'age': age
+                },
+                'reload_needed': False,
+                
+            }
+            return render(request, 'queuestat/pause_details.html', context)
+            
+        except Exception as e:
+            messages.error(request, f'An error occurred: {str(e)}')
+            return redirect('queuestats:pause_search')
+    
+    def clean_input(self, data):
+        """Equivalent to PHP test_input function"""
+        if data is None:
+            return ''
+        data = str(data).strip().strip('/')
+        return data
+    
+    def get_api_cookie(self):
+        api_url = 'https://192.168.20.216:8089/api'
+        
+        # Create session with legacy SSL support
+        session = requests.Session()
+        session.mount('https://', LegacyHTTPSAdapter())
+        
+        try:
+            # Step 1: Get challenge
+            challenge_data = {
+                "request": {
+                    "action": "challenge",
+                    "user": "cdrapi"
+                }
+            }
+            
+            headers = {
+                "Connection": "close",
+                "Content-Type": "application/json"
+            }
+            
+            response = session.post(
+                api_url,
+                json=challenge_data,
+                headers=headers,
+                verify=False,
+                timeout=30
+            )
+            
+            if response.status_code != 200:
+                return None
+                
+            challenge_response = response.json()
+            challenge = challenge_response.get('response', {}).get('challenge')
+            
+            if not challenge:
+                return None
+            
+            # Step 2: Generate token
+            password = "cdrapi123"
+            token = hashlib.md5((challenge + password).encode()).hexdigest()
+            
+            # Step 3: Login with token
+            login_data = {
+                "request": {
+                    "action": "login",
+                    "token": token,
+                    "user": "cdrapi"
+                }
+            }
+            
+            response = session.post(
+                api_url,
+                json=login_data,
+                headers=headers,
+                verify=False,
+                timeout=30
+            )
+            
+            if response.status_code != 200:
+                return None
+                
+            login_response = response.json()
+            cookie = login_response.get('response', {}).get('cookie')
+            
+            return cookie
+            
+        except Exception as e:
+            print(f"API authentication error: {e}")
+            return None
+
+    def get_queue_data(self, cookie, start_time, end_time, queue, agent):
+        api_url = 'https://192.168.20.216:8089/api'
+        
+        # Create session with legacy SSL support
+        session = requests.Session()
+        session.mount('https://', LegacyHTTPSAdapter())
+        
+        
+        try:
+            queue_request = {
+                "request": {
+                    "action": "queueapi",
+                    "endTime": end_time,
+                    "startTime": start_time,
+                    "queue": queue,
+                    "agent": agent,
+                    "format": "json",
+                    "statisticsType": "pausedhistory",
+                    "cookie": cookie
+                }
+            }
+            
+            headers = {
+                "Connection": "close",
+                "Content-Type": "application/json"
+            }
+            
+            response = session.post(
+                api_url,
+                json=queue_request,
+                headers=headers,
+                verify=False,
+                timeout=30
+            )
+            
+            if response.status_code != 200:
+                return None
+                
+            data = response.json()
+            
+            # Check if reload is needed
+            if isinstance(data.get('status'), int):
+                return None
+                
+            return data.get('queue_statistics', [])
+            
+        except Exception as e:
+            print(f"Queue data error: {e}")
+            return None
+    
+    def filter_data(self, queue_data):
+        """Filter data based on connection status"""
+        filtered_results = []
+        
+        for item in queue_data:
+            agent_data = item.get('agent', {})
+            
+            # Skip entries where agent is "NONE"
+            if agent_data.get('agent') == 'NONE':
+                continue
+                
+           
+            
+            filtered_results.append(agent_data)
+        
+        return filtered_results
+
+
+
+
+
+
+
 class LoginDetailsView(View):
     """Enhanced view with integrated alert monitoring"""
     
@@ -561,7 +791,7 @@ class LoginDetailsView(View):
         # Check if required fields are present
         if not all([sta, end]) or que is None or age is None :
             messages.error(request, 'Missing Entry!')
-            return redirect('login_search')
+            return redirect('queuestats:login_search')
         
         # Clean input data
         sta = self.clean_input(sta)

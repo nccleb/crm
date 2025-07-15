@@ -19,7 +19,7 @@
 </head>
 <body onload="size242()">
     <div class="jumbotron">
-        <p style="text-align:center;font-size:25px;" id="page-title">Agent Details</p>
+        <p style="text-align:center;font-size:25px;" id="page-title">Pause Details</p>
         
         {% if reload_needed %}
             <button style="color:blue" type="button" class="whatsappbutton" onclick="refresh()">
@@ -36,9 +36,9 @@
                                 
                                 <th>Extension</th>
                                 <th>Agent</th>
-                                <th>login_date</th>
-                                <th>logoff_date</th>
-                                <th>online_time</th>
+                                <th>pause_date</th>
+                                <th>pause_date</th>
+                                <th>pause_time</th>
                                
                                 
                             </tr>
@@ -49,9 +49,9 @@
                                     <td>{{ agent.queuechairman }}</td>
                                     <td>{{ agent.extension }}</td>
                                     <td>{{ agent.agent }}</td>
-                                    <td>{{ agent.login_data}}</td>
-                                    <td>{{ agent.logoff_data }}</td>
-                                    <td>{{ agent.online_time}}</td>
+                                    <td>{{ agent.pause_data}}</td>
+                                    <td>{{ agent.unpause_data }}</td>
+                                    <td>{{ agent.pause_time}}</td>
                                     
                                     
                                 </tr>
