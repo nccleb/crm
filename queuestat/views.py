@@ -76,8 +76,8 @@ class CallAlertManager:
             agent_data = item.get('agent', {})
             
             # Skip if agent is "NONE" 
-            if agent_data.get('agent') == 'NONE':
-                continue
+            #if agent_data.get('agent') == 'NONE':
+                #continue
             
             caller_num = agent_data.get('callernum', 'Unknown')
             start_time_str = agent_data.get('start_time', '')
