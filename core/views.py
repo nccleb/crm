@@ -39,7 +39,7 @@ def getfirstline(request):
     year = today.year
     
     # Use the exact path from your original code
-    path = r"C:\Users\DELL\crm\django_env\tealcrm\callerid\callerid.txt"
+    path = r"C:\Users\user\crm\django_env\tealcrm\callerid\callerid.txt"
     
     try:
         # Check if file exists

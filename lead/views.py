@@ -197,7 +197,7 @@ def add_lead(request):
             lead.save()
             messages.success(request, f"the lead was created!")
      else:
-          messages.success(request, f"the lead was not  created!")
+          messages.error(request, f"the lead was not  created!")
      return redirect('/leads_list/')
    else:
      form = AddLeadForm() 
@@ -254,42 +254,58 @@ class ConvertToClientView(LoginRequiredMixin, View):
         pk = self.kwargs.get('pk')
 
         team = self.request.user.userprofile.active_team
-       
         lead = get_object_or_404(Lead, team=team, pk=pk)
-
-       
-
-        client = Client.objects.create(
-            name=lead.name,
-            phone_number=lead.phone_number,
-            other=lead.other,
-            address=lead.address,
-            email=lead.email,
-            description=lead.description,
-            created_by=request.user,
-            team=team,
-        )
-
-        lead.converted_to_client = True
-        lead.save()
-
-        # Convert lead comments to client comments
-
-        comments = lead.comments.all()
-
-        for comment in comments:
-            ClientComment.objects.create(
-                client = client,
-                content = comment.content,
-                created_by = comment.created_by,
-                team = team
-           )
         
-        # Show message and redirect
+        # Check for duplicate phone number
+        if lead.phone_number:
+            existing_client = Client.objects.filter(
+                team=team, 
+                phone_number=lead.phone_number
+            ).first()
+            
+            if existing_client:
+                messages.error(
+                    request, 
+                    f'Cannot convert lead: A client with phone number {lead.phone_number} already exists.'
+                )
+                return redirect('leads:detail', pk=pk)
 
-        messages.success(request, 'The lead was converted to a client.')
+        
 
-        return redirect('leads_list')
+        # Proceed with conversion if no duplicates found
+        try:
+            client = Client.objects.create(
+                name=lead.name,
+                phone_number=lead.phone_number,
+                other=lead.other,
+                address=lead.address,
+                email=lead.email,
+                description=lead.description,
+                created_by=request.user,
+                team=team,
+            )
+
+            lead.converted_to_client = True
+            lead.save()
+
+            # Convert lead comments to client comments
+            comments = lead.comments.all()
+
+            for comment in comments:
+                ClientComment.objects.create(
+                    client=client,
+                    content=comment.content,
+                    created_by=comment.created_by,
+                    team=team
+                )
+            
+            # Show success message
+            messages.success(request, 'The lead was successfully converted to a client.')
+            return redirect('leads_list')
+            
+        except Exception as e:
+            messages.error(request, f'Failed to convert lead: {str(e)}')
+            return redirect('leads:detail', pk=pk)
 
 
 
